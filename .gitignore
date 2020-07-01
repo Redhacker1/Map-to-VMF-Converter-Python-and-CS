@@ -1,0 +1,12 @@
+
+*.map
+*.vmf
+*.vmx
+*.rmf
+*.log
+*.prt
+*.cache
+*.json
+*.props
+*.targets
+*.ide
