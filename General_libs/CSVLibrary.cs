@@ -5,9 +5,9 @@ using System.IO;
 
 
 
-namespace MapConverter
+namespace General_libs
 {
-    class CSVLibrary
+    public class CSVLibrary
     {
         readonly TextModificationLibrary TextLib = new TextModificationLibrary();
 

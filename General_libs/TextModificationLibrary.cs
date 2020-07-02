@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace MapConverter
+namespace General_libs
 {
-    class TextModificationLibrary
+   public class TextModificationLibrary
     {
 
         public string[] Human_list_to_CS_Array(string ListToTurn, char delimiter)
@@ -18,7 +18,7 @@ namespace MapConverter
         public string CS_Array_to_Human_List(dynamic[] ArrayToTurn)
         {
             string text_intermediate = ArrayToString(ArrayToTurn);
-            text_intermediate = Replace(text_intermediate,", ", ",");
+            text_intermediate = Replace(text_intermediate, ", ", ",");
             text_intermediate = Remove(text_intermediate, "[");
             text_intermediate = Remove(text_intermediate, "]");
             text_intermediate = Remove(text_intermediate, "'");
@@ -28,7 +28,7 @@ namespace MapConverter
 
         public string ArrayToString(dynamic[] array)
         {
-            string array_string = string.Join(',', array);
+            string array_string = string.Join(",", array);
             Add_to_both_sides(array_string, "[", "]");
             return array_string;
         }
@@ -69,14 +69,14 @@ namespace MapConverter
         public string Recombine(string[] list_text, bool Add_Space = false)
         {
             string returnstring = string.Empty;
-            if(Add_Space)
+            if (Add_Space)
             {
                 int index = 0;
                 foreach (string item in list_text)
                 {
-                   string text = item + " ";
-                   list_text[index] = text;
-                   ++index;
+                    string text = item + " ";
+                    list_text[index] = text;
+                    ++index;
                 };
 
             }
@@ -112,7 +112,15 @@ namespace MapConverter
                 file = new StreamWriter(path);
             }
             else
-                file = new StreamReader(path);
+                try
+                {
+                    file = new StreamReader(path);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    file = 0;
+                }
+
 
             return file;
         }
@@ -132,7 +140,7 @@ namespace MapConverter
             }
         }
 
-    public dynamic GetInDictionary(Dictionary<int, dynamic> File_Contents_Imported, int index, dynamic return_value = null)
+        public dynamic GetInDictionary(Dictionary<int, dynamic> File_Contents_Imported, int index, dynamic return_value = null)
         {
             try
             {
@@ -146,5 +154,5 @@ namespace MapConverter
             }
         }
 
-    }
+    } 
 }

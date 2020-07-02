@@ -1,29 +1,36 @@
 import TextModificationLib
 
-# Entities the program should reject (Currently Hardcoded will be opened to configuration files later)
+
+# Entities the program should replace (Currently Hardcoded, will be opened to configuration files later.)
 Replace_List = {'light_torch_small_walltorch': 'null', 'item_health': 'null', 'monster_zombie': 'null',
                 'weapon_nailgun': 'null', 'item_spikes': 'null', 'info_player_deathmatch': 'null',
-                'info_player_start2': 'info_player_start', 'func_episodegate': 'null'}
-# Texture to replace and the values to replace them with
+                'info_player_start2': 'null', 'func_episodegate': 'null'}
+
+
+# Texture to replace and the values to replace them with, again will be opened to config files later.
 Texture_replacement_dictionary = {'TRIGGER': 'tools/toolstrigger', 'CLIP': 'tools/toolsclip'}
-# base Texture Directory relative to the {game}/materials folder.
+
+
+# base Texture Directory relative to the {game}/materials folder, default is 'quake/' will be changeable via you
+# guessed it, the config file
 texture_dir = 'quake/'
 
-# Entities the program will pack into the vmf. No reason to edit this aside from if you want a certain entity in all
-# maps
+
+# Entities the program will pack into the vmf, No reason to edit this aside from if you want a certain entity in all
+# maps, entites if such a method is used should adhere to the internal structure used by the script
 final_entities = {}
 
 
 def Parse_File():
     world_dictionary = {}
-    print("Grabbing and proccessing entities..")
+    print("Grabbing and processingentities..")
     file = Get_Contents_of_MAP_File()
     print("Creating entity dictionary...")
     entities = Create_Entity_Dictionary(file)
     print("Prepping worldspawn...")
     brushes = Prep_Brushes(entities[1])
     print("converting Worldspawn...")
-    brushes = readSide(brushes, False)
+    brushes = Read_Side(brushes, False)
     print("Storing Data...")
     world_dictionary["worldspawn"] = brushes
     del entities[1]
@@ -48,10 +55,10 @@ def Create_Entity_Dictionary(entities_list):
                 entities_dict[i] = entity
                 i += 1
         if raiseException:
-            raise RuntimeError('worldspawn_not_found')
+            raise RuntimeError('worldspawn not found')
     except RuntimeError:
         print("ERROR: No worldspawn entity found, this is required!, exiting now...")
-        exit(10)
+        exit(-1)
 
     return entities_dict
 
@@ -76,11 +83,11 @@ def Get_Contents_of_MAP_File():
     i = 0
     try:
         MaxLines = TextModificationLib.Count_Lines_Fast(filename_internal)
-        Map_file = open(filename_internal, mode='r')
+        Map_file = open(filename_internal)
     except FileNotFoundError:
         print('ERROR: File has not been located!, please ensure the filename is in this location and that the path is'
               ' included if outside this directory')
-        exit(7)
+        exit(-2)
     for x in range(0, MaxLines):
         line = Map_file.readline()
         line_ascii = list(bytes(line, "ascii"))
@@ -110,7 +117,7 @@ def Create_BrushEntity_Brush(brush_data):
     firstwrite = True
     for side in brush_data:
         if brush_data[side].get('ID') == 1:
-            ending = EndBrushes(False, firstwrite)
+            ending = End_Brushes(first_write=firstwrite)
             if firstwrite:
                 firstwrite = False
             string_brush = string_brush + ending
@@ -127,7 +134,9 @@ def Parse_Brush(brush):
     return BrushData
 
 
-# Adds the basic starting info for Hammer this also makes it compatible with HL:A importing
+# Adds the basic starting info for Hammer this, the versioninfo and viewsettings bits are not importan for loading with
+# source 1 hammer but makes it compatible with source 2 hammer.
+
 def Write_VMF_File(world_data):
     firstwrite = True
     print("Writing Data, opening destination file...")
@@ -153,14 +162,14 @@ def Write_VMF_File(world_data):
     print("Writing Brush data...")
     for side in brush_data:
         if brush_data[side].get('ID') == 1:
-            ending = EndBrushes(False, firstwrite)
+            ending = End_Brushes(first_write=firstwrite)
             if firstwrite:
                 firstwrite = False
             file_1.write(ending)
         side_value = Make_Side_of_brush(brush_data[side])
         file_1.write(side_value)
     print("finishing up brush data...")
-    ending = EndBrushes(True)
+    ending = End_Brushes(True)
     file_1.write(ending)
     print("Creating entity list...")
     Create_Entity_List(entities)
@@ -175,7 +184,6 @@ def Write_Attribute_Normal(name, value):
 
 
 def Find_Attribute(ent_data, target_attribute, end_location="\n"):
-    pass
     attribute = TextModificationLib.FindBetweenTwoValues(ent_data, f'"{target_attribute}"', f"{end_location}")
     if attribute is not None:
         attribute = TextModificationLib.remove(attribute, '"')
@@ -215,7 +223,7 @@ def Detect_Attributes(ent_data):
     return attributes_dict
 
 
-def createEntity(ent_data, ent_id):
+def Create_Entity(ent_data, ent_id):
     Is_brush_entity = Detect_Brush_Entity(ent_data)
     attributes_dict = Detect_Attributes(ent_data)
     attributes_string = ''
@@ -225,7 +233,7 @@ def createEntity(ent_data, ent_id):
         data = Parse_Brush_Entity(ent_data)
         brush_data = data[1]
         brush_data = Prep_Brushes(brush_data)
-        brush_data = readSide(brush_data)
+        brush_data = Read_Side(brush_data)
         brush = Create_BrushEntity_Brush(brush_data)
         brush += "\n\t}"
 
@@ -249,7 +257,6 @@ def createEntity(ent_data, ent_id):
 
 
 def Make_Side_of_brush(properties):
-    global ID
     global texture_dir
     side: str = str(properties['points'])
     side = TextModificationLib.remove(side, ttr_multiple=["[", "]", ",", "'"])
@@ -282,7 +289,7 @@ def Make_Side_of_brush(properties):
     return plane
 
 
-def readSide(lines, mute=True):
+def Read_Side(lines, mute=True):
     if not mute:
         print("Extracting Data")
     plane_dict = {}
@@ -326,16 +333,16 @@ def readSide(lines, mute=True):
 def Create_Entity_List(entities):
     i = 1
     for entity in entities:
-        createEntity(entities[entity], i)
+        Create_Entity(entities[entity], i)
         i += 1
 
 
-def get_all_sides(faces):
-    map_data = readSide(faces)
+def Get_All_Sides(faces):
+    map_data = Read_Side(faces)
     return map_data
 
 
-def EndBrushes(end_file=False, first_write=False):
+def End_Brushes(end_file=False, first_write=False):
     if end_file:
         return '}}'
     if not first_write:
