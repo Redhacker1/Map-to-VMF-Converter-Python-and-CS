@@ -6,7 +6,7 @@ namespace General_libs
 {
    public class List_Modification_Lib
     {
-        public bool Compare_Arrays(dynamic[] array_1, dynamic[] array_2)
+        public bool Compare_Arrays(dynamic array_1, dynamic array_2)
         {
 
             if (array_1.Length != array_2.Length)
@@ -32,7 +32,7 @@ namespace General_libs
 
             if (Times_To_Rotate < 0)
             {
-                Times_To_Rotate += Math.Abs(length);
+                Times_To_Rotate = length = Math.Abs(Times_To_Rotate);
             }
 
             while (Times_To_Rotate > 0)
