@@ -1,5 +1,20 @@
-# Used to do the list rotation at the end I will replace it with an internal solution
-import collections
+
+
+# Splits a string int a list given a specified marker
+def split(input_string, split_by, quick=True):
+    text_split = ['']
+    if not quick:
+        split_instance = 0
+        for item in input_string:
+            if item == split_by:
+                if text_split[split_instance] != '':
+                    text_split.append('')
+                    split_instance += 1
+            else:
+                text_split[split_instance] = text_split[split_instance] + item
+    else:
+        text_split = input_string.split(split_by)
+    return text_split
 
 
 # TTR (Text to replace)
@@ -24,63 +39,12 @@ def recombine(list_text: list) -> str:
     return list_to_str
 
 
-# Splits a string int a list given a specified marker
-def split(input_string, split_by, quick=True):
-    text_split = ['']
-    if not quick:
-        split_instance = 0
-        for item in input_string:
-            if item == split_by:
-                if text_split[split_instance] != '':
-                    text_split.append('')
-                    split_instance += 1
-            else:
-                text_split[split_instance] = text_split[split_instance] + item
-    else:
-        text_split = input_string.split(split_by)
-    return text_split
-
-
 def Unwrap(input_string, left_side, right_side, add_back_newline=False):
     input_string = input_string.strip(left_side)
     input_string = input_string.strip(right_side + ' \n')
     if add_back_newline:
         input_string = input_string + ' \n' + right_side
     return input_string
-
-
-def Deferred_Split(text, split_by, times_to_defer=2):
-    text_split = ['']
-    split_instance = 0
-    for item in text:
-        if item == split_by and split_instance == times_to_defer:
-            print("match found")
-            if text_split[split_instance] != '':
-                text_split.append('')
-                split_instance += 1
-        elif split_instance <= times_to_defer:
-            text_split[split_instance] = text_split[split_instance] + item
-        else:
-            break
-    text_split[1] = remove(text, text_split[0])
-    return text_split
-
-
-def Split_First_Instance(text, split_by):
-    text_split = ['']
-    split_instance = 0
-    for item in text:
-        if item == split_by and split_instance == 0:
-            if text_split[split_instance] != '':
-                text_split.append('')
-                split_instance += 1
-        elif split_instance == 0:
-            text_split[split_instance] = text_split[split_instance] + item
-        else:
-            break
-    cheat_string = remove(text, text_split[0])
-    text_split[1] = cheat_string
-    return text_split
 
 
 # Adds something to both sides, can be used with "" on the side you do not want anything in to add something to the
@@ -130,23 +94,6 @@ def Check_File_Has_Contents(input_file):
         print("Mounting SpreadSheet!")
         setup = True
     return setup
-
-
-def python_list_to_Human_list(text):
-    # Grabs the text one line_number at a time to format it
-    text_intermediate = str(text)
-    # Removes extra space in beginning keeping with excessive use the text flying off into space
-    text_intermediate = replace(text_intermediate, ', ', ',')
-    # Removes Square bracket Left
-    text_intermediate = remove(text_intermediate, '[')
-    # Removes Square Bracket right
-    text_intermediate = remove(text_intermediate, ']')
-    # Removes single quote in values
-    text_intermediate = remove(text_intermediate, "'")
-    # Prints for Debugging (currently disabled)
-    # print(text_intermediate)
-    # Writes it and a new line_number at the end
-    return text_intermediate
 
 
 # Use function to make string lower case and do case-less matching to ensure it matches and makes things case
@@ -211,10 +158,3 @@ def FindBetweenTwoValues(Search, firstIndex, LastIndex, suppress_error=True):
     except IndexError:
         if not suppress_error:
             print(Search, firstIndex, LastIndex)
-
-
-def RotateList(list_to_rotate, rotate_by):
-    rotate_list = collections.deque(list_to_rotate)
-    rotate_list.rotate(rotate_by)
-    rotate_list = list(rotate_list)
-    return rotate_list
