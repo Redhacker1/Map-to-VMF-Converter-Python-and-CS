@@ -36,3 +36,17 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\D
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.csproj.CopyComplete
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.exe
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.deps.json
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.runtimeconfig.json
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.runtimeconfig.dev.json
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.dll
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.pdb
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.dll
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.pdb
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.csprojAssemblyReference.cache
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.AssemblyInfoInputs.cache
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.AssemblyInfo.cs
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.csproj.CopyComplete
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.dll
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.pdb

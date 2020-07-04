@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace MapConverter
 {
@@ -8,9 +6,9 @@ namespace MapConverter
 
     { 
 
-        static string beginpath = "C:/Users/donov/Documents/GitHub/Quake_source_Tools/maps/map_files/quake_1/";
+        static string beginpath = "D:/Repo's/Csharp_IMS/Quake_source_Tools/maps/map_files/quake_1/";
         static readonly Map_File_lib Maplib = new Map_File_lib();
-        static readonly General_libs.List_Modification_Lib List = new General_libs.List_Modification_Lib();
+        static readonly General_libs.Array_Dict_and_list_library List = new General_libs.Array_Dict_and_list_library();
         static void Main(string[] args)
         {
             int[] Buffer = { 123, 10 };

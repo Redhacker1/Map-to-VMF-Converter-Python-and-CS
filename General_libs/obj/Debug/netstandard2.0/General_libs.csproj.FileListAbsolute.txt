@@ -7,3 +7,11 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.pdb
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.deps.json
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.dll
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.pdb
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.csprojAssemblyReference.cache
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.AssemblyInfoInputs.cache
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.AssemblyInfo.cs
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.dll
+D:\Repo's\Csharp_IMS\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.pdb

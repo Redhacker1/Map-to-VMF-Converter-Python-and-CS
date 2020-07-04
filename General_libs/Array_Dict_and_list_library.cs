@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace General_libs
 {
-   public class List_Modification_Lib
+    public class Array_Dict_and_list_library
     {
         public bool Compare_Arrays(dynamic array_1, dynamic array_2)
         {
@@ -32,7 +31,7 @@ namespace General_libs
 
             if (Times_To_Rotate < 0)
             {
-                Times_To_Rotate = length = Math.Abs(Times_To_Rotate);
+                Times_To_Rotate = length + Math.Abs(Times_To_Rotate);
             }
 
             while (Times_To_Rotate > 0)

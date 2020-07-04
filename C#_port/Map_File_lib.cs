@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MapConverter
@@ -8,7 +9,7 @@ namespace MapConverter
     {
         //currently filled with temporary variables so I do not have to worry about variable placement
         General_libs.TextModificationLibrary Text = new General_libs.TextModificationLibrary();
-        General_libs.List_Modification_Lib List = new General_libs.List_Modification_Lib();
+        General_libs.Array_Dict_and_list_library List = new General_libs.Array_Dict_and_list_library();
         string oldcharacter_character = string.Empty;
         string current_entity = string.Empty;
         int[] Buffer = new int[2];
@@ -19,8 +20,11 @@ namespace MapConverter
         readonly General_libs.TextModificationLibrary TextLib = new General_libs.TextModificationLibrary();
         public void ImportMAPfile(string path)
         {
+            int lines = 0;
             var fs = TextLib.Open(path);
-            int lines = (int)TextLib.CountLinesReader(path);
+            lines = TextLib.CountLinesReader(path);
+
+
             for (int i = 1; i < lines; i++)
             {
                 string file_line = fs.ReadLine();

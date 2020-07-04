@@ -90,9 +90,24 @@ namespace General_libs
         //Counts The amount of lines in the file
         public int CountLinesReader(string path)
         {
-            int count = File.ReadAllLines(path).Length;
+            int count = 0;
+            try
+            {
+                count = File.ReadAllLines(path).Length;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("Directory Not found!");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("File Not found!");
+            }
+
+
             return count;
         }
+
         //Equivalent to readfile in python 
         public string Get_Contents_as_String(String path)
         {
@@ -120,27 +135,32 @@ namespace General_libs
                 {
                     file = 0;
                 }
+                catch (FileNotFoundException)
+                {
+                    file = 0;
+                }
 
 
             return file;
         }
+
         // (hopefully) gets the value of a line with Error Handling
-        public string[] GetstringAsArray(Dictionary<int, dynamic> File_Contents_Imported, int line, bool LFS)
+        public string[] Get_Delimited_String_as_Array(Dictionary<int, dynamic> File_Contents_Imported, int line, bool LFS)
         {
             if (LFS)
             {
-                string file_line = GetInDictionary(File_Contents_Imported, line);
+                string file_line = Get_In_Dictionary(File_Contents_Imported, line);
                 file_line += Remove(file_line, "\n");
                 string[] file_line_split = file_line.Split(',');
                 return file_line_split;
             }
             else
             {
-                return GetInDictionary(File_Contents_Imported, line);
+                return Get_In_Dictionary(File_Contents_Imported, line);
             }
         }
 
-        public dynamic GetInDictionary(Dictionary<int, dynamic> File_Contents_Imported, int index, dynamic return_value = null)
+        public dynamic Get_In_Dictionary(Dictionary<int, dynamic> File_Contents_Imported, int index, dynamic return_value = null)
         {
             try
             {

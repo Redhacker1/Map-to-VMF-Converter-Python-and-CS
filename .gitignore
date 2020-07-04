@@ -10,3 +10,8 @@
 *.props
 *.targets
 *.ide
+maps/release_readme.txt
+maps/e2m10.txt
+*.xml
+*.iml
+.idea/Map-to-VMF-Converter-Python-and-CS.iml
