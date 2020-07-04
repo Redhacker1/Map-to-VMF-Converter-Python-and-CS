@@ -8,7 +8,7 @@ namespace MapConverter
     class Map_File_lib
     {
         //currently filled with temporary variables so I do not have to worry about variable placement
-        General_libs.TextModificationLibrary Text = new General_libs.TextModificationLibrary();
+        General_libs.Text_Modification_Library Text = new General_libs.Text_Modification_Library();
         General_libs.Array_Dict_and_list_library List = new General_libs.Array_Dict_and_list_library();
         string oldcharacter_character = string.Empty;
         string current_entity = string.Empty;
@@ -17,7 +17,7 @@ namespace MapConverter
 
 
         //text library
-        readonly General_libs.TextModificationLibrary TextLib = new General_libs.TextModificationLibrary();
+        readonly General_libs.Text_Modification_Library TextLib = new General_libs.Text_Modification_Library();
         public void ImportMAPfile(string path)
         {
             int lines = 0;

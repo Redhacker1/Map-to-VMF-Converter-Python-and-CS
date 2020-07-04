@@ -5,34 +5,8 @@ using System.IO;
 
 namespace General_libs
 {
-   public class TextModificationLibrary
+   public class Text_Modification_Library
     {
-
-        public string[] Human_list_to_CS_Array(string ListToTurn, char delimiter)
-        {
-            ListToTurn += Remove(ListToTurn, "\n");
-            string[] ArrayOutput = ListToTurn.Split(delimiter);
-            return ArrayOutput;
-
-        }
-        public string CS_Array_to_Human_List(dynamic[] ArrayToTurn)
-        {
-            string text_intermediate = ArrayToString(ArrayToTurn);
-            text_intermediate = Replace(text_intermediate, ", ", ",");
-            text_intermediate = Remove(text_intermediate, "[");
-            text_intermediate = Remove(text_intermediate, "]");
-            text_intermediate = Remove(text_intermediate, "'");
-
-            return text_intermediate;
-        }
-
-        public string ArrayToString(dynamic[] array)
-        {
-            string array_string = string.Join(",", array);
-            Add_to_both_sides(array_string, "[", "]");
-            return array_string;
-        }
-
         public string Remove(string Input, string TextToRemove)
         {
             Input = Replace(Input, TextToRemove, "");

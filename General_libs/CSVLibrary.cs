@@ -9,7 +9,8 @@ namespace General_libs
 {
     public class CSVLibrary
     {
-        readonly TextModificationLibrary TextLib = new TextModificationLibrary();
+        readonly Text_Modification_Library TextLib = new Text_Modification_Library();
+        readonly Array_Dict_and_list_library ListLib = new Array_Dict_and_list_library();
 
 
         public string[] GetLineArray(Dictionary<int, dynamic>File_contents_imported, int line_number, bool LFS)
@@ -71,7 +72,7 @@ namespace General_libs
                 }
                 else
                 {
-                    string text = TextLib.CS_Array_to_Human_List(file_contents_imported[0]);
+                    string text = Array_Dict_and.CS_Array_to_Human_List(file_contents_imported[0]);
                     file.Write(text + '\n');
                 }
             }
