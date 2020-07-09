@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 
 
@@ -72,7 +71,7 @@ namespace General_libs
                 }
                 else
                 {
-                    string text = Array_Dict_and.CS_Array_to_Human_List(file_contents_imported[0]);
+                    string text = ListLib.CS_Array_to_Human_List(file_contents_imported[0]);
                     file.Write(text + '\n');
                 }
             }
@@ -103,7 +102,7 @@ namespace General_libs
                         if (thing.GetType().FullName == "System.String[]")
                         {
                             dynamic text = item.Value;
-                            text = TextLib.CS_Array_to_Human_List(text);
+                            text = ListLib.CS_Array_to_Human_List(text);
                             file.Write(text + '\n');
                         }
                     }
