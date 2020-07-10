@@ -17,7 +17,15 @@ namespace General_libs
             for (int increment = 0; increment < array_1.Length; increment++)
             {
                 if (array_1[increment] != array_2[increment])
+                {
+                    if (array_1[increment.GetType == Char.GetType])
+                    {
+
+                    }
+                    Console.WriteLine(array_1[0]);
                     return false;
+                }
+                    
             }
 
             return true;
@@ -28,11 +36,11 @@ namespace General_libs
 
             Queue<dynamic> queue = new Queue<dynamic>(List);
             Stack<int> stack = new Stack<int>();
-            int length = List.Length - 1;
+            int length = List.Length;
 
             if (Times_To_Rotate < 0)
             {
-                Times_To_Rotate = length + Math.Abs(Times_To_Rotate + 1);
+                Times_To_Rotate = length + Math.Abs(Times_To_Rotate);
             }
 
             while (Times_To_Rotate > 0)
