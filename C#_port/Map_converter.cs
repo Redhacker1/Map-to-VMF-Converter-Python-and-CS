@@ -15,7 +15,7 @@ namespace MapConverter
 
         Maplib.ImportMAPfile(beginpath + "B_ARMOR3.MAP");
         Console.WriteLine(List.Compare_Arrays(Buffer, new int[2] { 123, 10 }));
-        Test_libscript.Testscripts.rotate_test();
+        //Test_libscript.Testscripts.rotate_test();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace General_libs
                 {
                     if (array_1[increment] is int)
                     {
-                        Console.WriteLine(array_1[increment]);
+                        Console.WriteLine(array_1.ArrayToString);
                     }
                     Console.WriteLine(array_1[0]);
                     return false;
