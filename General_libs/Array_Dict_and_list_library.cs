@@ -22,7 +22,6 @@ namespace General_libs
                     {
                         Console.WriteLine(array_1.ArrayToString);
                     }
-                    Console.WriteLine(array_1[0]);
                     return false;
                 }
                     
