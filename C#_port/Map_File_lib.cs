@@ -31,10 +31,11 @@ namespace MapConverter
                 string file_line = fs.ReadLine();
                 foreach (char character in file_line)
                     {
-                        if (Buffer.Length > 2)
+                        if (Buffer.Length == 2)
                         {
                             Buffer = List.Rotate_List(Buffer, -1);
                             Buffer[1] = character;
+                            Console.WriteLine(Buffer[1]);
                         }
                         if (ListLib.Compare_Arrays(Buffer, new dynamic[2] { 123, 10 }))
                         {
