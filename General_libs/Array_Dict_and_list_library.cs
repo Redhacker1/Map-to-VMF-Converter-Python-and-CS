@@ -32,7 +32,7 @@ namespace General_libs
 
             if (Times_To_Rotate < 0)
             {
-                Times_To_Rotate = length + Math.Abs(Times_To_Rotate);
+                Times_To_Rotate = length + Math.Abs(Times_To_Rotate + 1);
             }
 
             while (Times_To_Rotate > 0)

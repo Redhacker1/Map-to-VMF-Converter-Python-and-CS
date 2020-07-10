@@ -15,6 +15,7 @@ namespace MapConverter
 
         Maplib.ImportMAPfile(beginpath + "E3M5.MAP");
         Console.WriteLine(List.Compare_Arrays(Buffer, new int[2] { 123, 10 }));
+        Test_libscript.Testscripts.rotate_test();
         }
     }
 }
