@@ -1,12 +1,3 @@
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.csprojAssemblyReference.cache
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.AssemblyInfoInputs.cache
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.AssemblyInfo.cs
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.csproj.CoreCompileInputs.cache
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.deps.json
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.dll
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.pdb
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.dll
-C:/Users/donov/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/netstandard2.0/General_libs.pdb
 D:/Repo's/Csharp_IMS/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.deps.json
 D:/Repo's/Csharp_IMS/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.dll
 D:/Repo's/Csharp_IMS/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.pdb
@@ -24,3 +15,11 @@ D:/Repo's/Csharp_IMS/Map-to-VMF-Converter-Python-and-CS/General_libs/obj/Debug/n
 /home/donovanariesstrawhacker/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.deps.json
 /home/donovanariesstrawhacker/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.dll
 /home/donovanariesstrawhacker/Documents/GitHub/Map-to-VMF-Converter-Python-and-CS/General_libs/bin/Debug/netstandard2.0/General_libs.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.AssemblyInfoInputs.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.AssemblyInfo.cs
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.csproj.CoreCompileInputs.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.deps.json
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.pdb
