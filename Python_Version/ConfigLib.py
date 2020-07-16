@@ -11,8 +11,8 @@ Replace_List = {'light_torch_small_walltorch': 'null', 'item_health': 'null', 'm
 Texture_replacement_dictionary = {'TRIGGER': 'tools/toolstrigger', 'CLIP': 'tools/toolsclip'}
 
 
-# base Texture Directory relative to the {game}/materials folder, default is 'quake/' will be changeable via you
-# guessed it, the config file
+# base Texture Directory relative to the {game}/materials folder, default is 'quake/'. It will be changeable in the
+# config file as well
 texture_dir = 'quake/'
 
 
@@ -23,19 +23,19 @@ final_entities = {}
 
 def Parse_File():
     world_dictionary = {}
-    print("Grabbing and processingentities..")
+    print("Grabbing and processing entities..")
     file = Get_Contents_of_MAP_File()
     print("Creating entity dictionary...")
     entities = Create_Entity_Dictionary(file)
-    print("Prepping worldspawn...")
+    print("Preparing worldspawn...")
     brushes = Prep_Brushes(entities[1])
-    print("converting Worldspawn...")
+    print("Converting Worldspawn...")
     brushes = Read_Side(brushes, False)
-    print("Storing Data...")
+    print("Storing data...")
     world_dictionary["worldspawn"] = brushes
     del entities[1]
     world_dictionary["entities"] = entities
-    print("Finished Parsing Data!")
+    print("Finished parsing data!")
     return world_dictionary
 
 
@@ -65,7 +65,7 @@ def Create_Entity_Dictionary(entities_list):
 
 def Prep_Brushes(world_spawn_item):
     brushes = TextModificationLib.Split_First_Instance(world_spawn_item, '(')
-    brushes = TextModificationLib.split(brushes[1], '\n', True)
+    brushes = TextModificationLib.split(brushes[1], '\n')
     sides = []
     for item in brushes:
         side = Parse_Brush(item)
@@ -88,7 +88,7 @@ def Get_Contents_of_MAP_File():
         print('ERROR: File has not been located!, please ensure the filename is in this location and that the path is'
               ' included if outside this directory')
         exit(-2)
-    for x in range(0, MaxLines):
+    for _ in range(0, MaxLines):
         line = Map_file.readline()
         line_ascii = list(bytes(line, "ascii"))
         # Rotate list or if not big enough to qualify for a rotation just add another letter
@@ -302,8 +302,8 @@ def Read_Side(lines, mute=True):
             value = TextModificationLib.remove(value, "]")
             value = TextModificationLib.remove(value, "( ")
             value = TextModificationLib.replace(value, "  ", ' ')
-            value = TextModificationLib.split(value, " ) ", True)
-            Other_values = TextModificationLib.split(value[3], ' ', True)
+            value = TextModificationLib.split(value, " ) ")
+            Other_values = TextModificationLib.split(value[3], ' ')
             for item in Other_values:
                 if item == ' ':
                     Other_values.remove(' ')

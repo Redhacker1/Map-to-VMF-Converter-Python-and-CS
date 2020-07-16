@@ -107,13 +107,19 @@ namespace General_libs
                 }
                 catch (DirectoryNotFoundException)
                 {
+                    Console.WriteLine("Directory Relax");
                     file = 0;
                 }
                 catch (FileNotFoundException)
                 {
+                    Console.WriteLine("File Not found");
                     file = 0;
                 }
-
+                catch (UnauthorizedAccessException)
+                {
+                    Console.WriteLine("Access Denied");
+                    file = 0;
+                }
 
             return file;
         }
@@ -146,6 +152,14 @@ namespace General_libs
                 Console.WriteLine("Error, This Key is not found in the index!");
                 return return_value;
             }
+        }
+
+        public string AppendString(string item_1, string item_2)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(item_1);
+            builder.Append(item_2);
+            return builder.ToString();
         }
 
     } 

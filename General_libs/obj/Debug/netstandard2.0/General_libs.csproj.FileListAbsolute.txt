@@ -23,3 +23,4 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.deps.json
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\bin\Debug\netstandard2.0\General_libs.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\General_libs\obj\Debug\netstandard2.0\General_libs.csprojAssemblyReference.cache

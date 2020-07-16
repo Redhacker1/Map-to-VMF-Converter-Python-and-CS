@@ -1,12 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\General_libs\General_libs.csproj" />
+    <ProjectReference Include="..\PythonNetData\Py_embedded_v37.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Python.Runtime">
+      <HintPath>bin\x64\Debug\netcoreapp3.1\thirdparty\python\site-packages\Python.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

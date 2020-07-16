@@ -1,0 +1,12 @@
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Release\netstandard2.0\Py_embedded_v37.deps.json
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Release\netstandard2.0\Py_embedded_v37.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Release\netstandard2.0\Py_embedded_v37.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.csprojAssemblyReference.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.AssemblyInfoInputs.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.AssemblyInfo.cs
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Release\netstandard2.0\Python.Runtime.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.csproj.CopyComplete
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Release\netstandard2.0\Py_embedded_v37.csproj.CoreCompileInputs.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Release\netstandard2.0\Python.Runtime.xml

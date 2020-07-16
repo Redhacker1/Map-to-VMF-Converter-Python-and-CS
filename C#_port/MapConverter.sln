@@ -5,22 +5,42 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapConverter", "MapConverter.csproj", "{C6B209BC-F243-4F38-9309-36ADA1ED2236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "General_libs", "..\General_libs\General_libs.csproj", "{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "General_libs", "..\General_libs\General_libs.csproj", "{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Py_embedded_v37", "..\PythonNetData\Py_embedded_v37.csproj", "{46770BEC-588D-49AE-84D8-49F18C68DC69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Debug|x64.ActiveCfg = Debug|x64
+		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Debug|x64.Build.0 = Debug|x64
 		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Release|x64.ActiveCfg = Release|x64
+		{C6B209BC-F243-4F38-9309-36ADA1ED2236}.Release|x64.Build.0 = Release|x64
 		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Debug|x64.ActiveCfg = Debug|x64
+		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Debug|x64.Build.0 = Debug|x64
 		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Release|x64.ActiveCfg = Release|x64
+		{25E94E59-8B7D-4E8D-BFBA-E00704FCA6CC}.Release|x64.Build.0 = Release|x64
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Debug|x64.ActiveCfg = Debug|x64
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Debug|x64.Build.0 = Debug|x64
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Release|x64.ActiveCfg = Release|x64
+		{46770BEC-588D-49AE-84D8-49F18C68DC69}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

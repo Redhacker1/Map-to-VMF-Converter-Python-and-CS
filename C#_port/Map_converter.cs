@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Python.Runtime;
 
 namespace MapConverter
 {
@@ -6,16 +8,19 @@ namespace MapConverter
 
     { 
 
-        static string beginpath = "/home/donovanariesstrawhacker/Documents/GitHub/Quake_source_Tools/maps/map_files/quake_1/";
-        //static string beginpath_windows = "C:/Users/donov/Documents/GitHub/Quake_source_Tools/maps/map_files/quake_1/";
+        //static string beginpath = "/home/donovanariesstrawhacker/Documents/GitHub/Quake_source_Tools/maps/map_files/quake_1/";
+        static string beginpath_windows = "C:/Users/donov/Documents/GitHub/Quake_source_Tools/maps/map_files/quake_1/";
         static readonly Map_File_lib Maplib = new Map_File_lib();
         static readonly General_libs.Array_Dict_and_list_library List = new General_libs.Array_Dict_and_list_library();
+        static readonly General_libs.Text_Modification_Library TextLib = new General_libs.Text_Modification_Library(); 
         static void Main(string[] args)
         {
-            int[] Buffer = { 123, 10 };
+            {
+                //var pythonPath = @"C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\thirdparty\python";
+                PythonNetData.Class1 TestScript = new PythonNetData.Class1();
 
-        Maplib.ImportMAPfile(beginpath + "B_ARMOR3.MAP");
-        //Test_libscript.Testscripts.rotate_test();
+                PythonNetData.Class1.Test();
+            }
         }
     }
 }
