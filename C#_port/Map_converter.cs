@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Python.Runtime;
 
 namespace MapConverter
 {
@@ -17,9 +16,10 @@ namespace MapConverter
         {
             {
                 //var pythonPath = @"C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\thirdparty\python";
-                PythonNetData.Class1 TestScript = new PythonNetData.Class1();
 
-                PythonNetData.Class1.Test();
+                Py_embedded_v37.PythonAbstractions Python = new Py_embedded_v37.PythonAbstractions();
+                Python.RunScript(@"C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\EmbededPy3.7\Scripts", "ConfigLib.py");
+                
             }
         }
     }

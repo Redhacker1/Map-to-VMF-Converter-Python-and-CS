@@ -7,14 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmbededPy3.7\Py_embedded_v37.csproj" />
     <ProjectReference Include="..\General_libs\General_libs.csproj" />
-    <ProjectReference Include="..\PythonNetData\Py_embedded_v37.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Python.Runtime">
-      <HintPath>bin\x64\Debug\netcoreapp3.1\thirdparty\python\site-packages\Python.Runtime.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
