@@ -19,6 +19,7 @@ namespace MapConverter
 
                 Py_embedded_v37.PythonAbstractions Python = new Py_embedded_v37.PythonAbstractions();
                 Python.RunScript(@"C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\EmbededPy3.7\Scripts", "ConfigLib.py");
+                Python.RunFunction(@"C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\EmbededPy3.7\Scripts", "ConfigLib.py", "main");
                 
             }
         }

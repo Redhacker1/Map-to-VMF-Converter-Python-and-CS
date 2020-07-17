@@ -99,7 +99,26 @@ namespace Py_embedded_v37
 
         }
 
+        public dynamic RunFunction(string ScriptLocation = "Scripts", string ScriptName = "Main.py", string FuncName = "Main()")
+        {
+            dynamic return_value = null;
+            try
+            {
+                dynamic script = PythonEngine.ImportModule(ScriptLocation + "." + ScriptName);
+                Console.WriteLine("Function Starting");
+                return_value = script.FuncName;
+            }
+            catch (PythonException Exception)
+            {
+                Console.WriteLine(Exception.Message);
+                TerminatePython();
+                return false;
+            }
 
+            return return_value;
+        }
+
+        
     }
     // Direct Access to PythonEngine and PythonException to allow for more advanced functionality
     public class Manual_Access

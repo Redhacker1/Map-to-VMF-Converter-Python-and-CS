@@ -351,8 +351,10 @@ def End_Brushes(end_file=False, first_write=False):
     else:
         return "\n\tsolid\n\t{"
 
-print("Starting")
-filename = input(':> ')
-print("Initializing Parse")
-world = Parse_File()
-Write_VMF_File(world)
+
+def main()
+    print("Starting")
+    filename = input(':> ')
+    print("Initializing Parse")
+    world = Parse_File()
+    Write_VMF_File(world)
