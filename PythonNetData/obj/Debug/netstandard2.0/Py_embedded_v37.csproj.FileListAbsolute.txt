@@ -4,7 +4,6 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.AssemblyInfoInputs.cache
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.AssemblyInfo.cs
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Py_embedded_v37.pdb
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.csproj.CoreCompileInputs.cache
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Python37\DLLs\libcrypto-1_1.dll
@@ -11146,3 +11145,11 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Python37\Tools\scripts\update_file.py
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Python37\Tools\scripts\which.py
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Python37\Tools\scripts\win_add2path.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\General_libs.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\General_libs.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.csproj.CopyComplete
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\obj\Debug\netstandard2.0\Py_embedded_v37.csproj.CoreCompileInputs.cache
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Scripts\ConfigLib Legacy.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Scripts\ConfigLib.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Scripts\List_Dict_Array_Library.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\PythonNetData\bin\Debug\netstandard2.0\Scripts\TextModificationLib.py

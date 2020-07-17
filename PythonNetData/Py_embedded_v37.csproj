@@ -8,9 +8,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Python.Runtime.NETStandard" Version="3.7.1" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Scripts\" />
     <Folder Include="Python37\" />
   </ItemGroup>
 
@@ -18,6 +20,16 @@
     <Content Include="Python37\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scripts\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\General_libs\General_libs.csproj" />
   </ItemGroup>
 
 </Project>

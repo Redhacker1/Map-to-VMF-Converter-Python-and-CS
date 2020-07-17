@@ -11208,3 +11208,7 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\D
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Python37\Tools\scripts\win_add2path.py
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Py_embedded_v37.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Py_embedded_v37.pdb
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Scripts\ConfigLib Legacy.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Scripts\ConfigLib.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Scripts\List_Dict_Array_Library.py
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Scripts\TextModificationLib.py

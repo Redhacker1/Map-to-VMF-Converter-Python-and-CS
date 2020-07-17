@@ -1,16 +1,16 @@
-﻿using Python.Runtime;
-using System;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Python.Runtime;
 
-namespace PythonNetData
+namespace Py_embedded_v37
 {
-    public class Class1
+    class PythonAbstractions
     {
-        private static string pythonPath1 = @"\Python37";
-        public static void Test()
+        dynamic Initpython()
         {
             General_libs.Text_Modification_Library Textlib = new General_libs.Text_Modification_Library();
-            string pathToPython = pythonPath1;
+            string pathToPython = @"\Python37";
             string path = pathToPython + ";" +
             Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Process);
             Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Process);
@@ -27,16 +27,7 @@ namespace PythonNetData
             string paths = string.Join("; ", lib);
             Environment.SetEnvironmentVariable("PYTHONPATH", paths, EnvironmentVariableTarget.Process);
             PythonEngine.Initialize();
-            dynamic Script = Textlib.Open(@"Scripts\ConfigLib.py");
-            string ScriptString = Script.ReadToEnd();
-
-            using (Py.GIL()) //Initialize the Python engine and acquire the interpreter lock
-            {
-
-                // import your script into the process
-                Py.Import("Scripts.ConfigLib");
-
-            }
+            return
         }
     }
 }
