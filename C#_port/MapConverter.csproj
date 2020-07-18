@@ -3,12 +3,24 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EmbededPy3.7\Py_embedded_v37.csproj" />
     <ProjectReference Include="..\General_libs\General_libs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Py_embedded_v37">
+      <HintPath>..\..\Python-Integration-for-.Net\bin\Debug\netstandard2.0\Py_embedded_v37.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Py_embedded_v37.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

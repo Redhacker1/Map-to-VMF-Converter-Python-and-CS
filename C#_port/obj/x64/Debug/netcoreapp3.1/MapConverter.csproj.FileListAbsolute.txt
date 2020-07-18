@@ -1,3 +1,4 @@
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\Py_embedded_v37.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\MapConverter.exe
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\MapConverter.deps.json
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\MapConverter.runtimeconfig.json
@@ -15,6 +16,3 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\x
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\x64\Debug\netcoreapp3.1\MapConverter.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\x64\Debug\netcoreapp3.1\MapConverter.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\x64\Debug\netcoreapp3.1\MapConverter.genruntimeconfig.cache
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\PythonNetData.dll
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\PythonNetData.pdb
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\x64\Debug\netcoreapp3.1\System.Security.Permissions.dll

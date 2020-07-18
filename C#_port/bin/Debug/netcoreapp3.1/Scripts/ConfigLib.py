@@ -1,5 +1,6 @@
 import Scripts.TextModificationLib as TextModificationLib
 import Scripts.List_Dict_Array_Library as List_Dict_Array_Library
+filename = ''
 
 
 # Entities the program should replace (Currently Hardcoded, will be opened to configuration files later.)
@@ -352,7 +353,8 @@ def End_Brushes(end_file=False, first_write=False):
         return "\n\tsolid\n\t{"
 
 
-def main()
+def main():
+    global filename
     print("Starting")
     filename = input(':> ')
     print("Initializing Parse")
