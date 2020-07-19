@@ -1,3 +1,7 @@
+NOTE: PythonNetData Contains a python interpreter. Everything applicable governed by the Python Software Foundation Licence 
+I have mostly Deleted a few folders, notably scripts, tcl and Doc. Mainly this means no pip and that libraries must be installed manually. There is also Pythonnet's clr.pyd included and numpy which are governed by their specific licenses.
+
+
 MIT License
 
 Copyright (c) 2020 Donovan
