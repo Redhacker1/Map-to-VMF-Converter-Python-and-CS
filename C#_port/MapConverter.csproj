@@ -17,10 +17,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Py_embedded_v37.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
