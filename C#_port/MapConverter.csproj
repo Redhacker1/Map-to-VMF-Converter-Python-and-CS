@@ -7,12 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\General_libs\General_libs.csproj" />
+    <None Remove="General Libs.dll" />
+    <None Remove="Py_embedded_v37.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="General Libs.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Py_embedded_v37.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Py_embedded_v38.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="General Libs">
+      <HintPath>General Libs.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
     <Reference Include="Py_embedded_v37">
-      <HintPath>..\..\Python-Integration-for-.Net\bin\Debug\netstandard2.0\Py_embedded_v37.dll</HintPath>
+      <HintPath>Py_embedded_v37.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>

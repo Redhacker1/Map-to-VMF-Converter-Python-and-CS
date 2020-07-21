@@ -4,9 +4,6 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\D
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.runtimeconfig.dev.json
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.dll
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\MapConverter.pdb
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Python.Runtime.dll
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.dll
-C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General_libs.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.csprojAssemblyReference.cache
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.AssemblyInfoInputs.cache
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.AssemblyInfo.cs
@@ -16,3 +13,4 @@ C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\D
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.pdb
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\obj\Debug\netcoreapp3.1\MapConverter.genruntimeconfig.cache
 C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\Py_embedded_v37.dll
+C:\Users\donov\Documents\GitHub\Map-to-VMF-Converter-Python-and-CS\C#_port\bin\Debug\netcoreapp3.1\General Libs.dll

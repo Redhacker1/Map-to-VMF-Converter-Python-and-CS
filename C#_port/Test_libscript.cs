@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Test_libscript
+namespace MapConverter
 {
-    class Testscripts
+    public class Testscripts
     {
         static General_libs.Array_Dict_and_list_library TestingListLibrary = new General_libs.Array_Dict_and_list_library();
         static readonly General_libs.Text_Modification_Library TextLib = new General_libs.Text_Modification_Library();
