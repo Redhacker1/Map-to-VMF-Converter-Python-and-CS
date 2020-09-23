@@ -1,9 +1,9 @@
 import collections
-from Scripts.TextModificationLib import *
+from Python_Version.TextModificationLib import *
 
 
 # Turns a delimited string into a variable used mostly for configuration library stuff
-def String_To_Dictionary(string, line_split=";", value_split="="):
+def string_to_dictionary(string, line_split=";", value_split="="):
     dict_new = {}
     values = split(string, line_split, True)
     for item in values:
@@ -12,14 +12,14 @@ def String_To_Dictionary(string, line_split=";", value_split="="):
     return dict_new
 
 
-def RotateList(list_to_rotate, rotate_by):
-    rotate_list = collections.deque(list_to_rotate)
-    rotate_list.rotate(rotate_by)
-    rotate_list = list(rotate_list)
-    return rotate_list
+def rotate_list(list_to_rotate, rotate_by):
+    rotate_list_internal = collections.deque(list_to_rotate)
+    rotate_list_internal.rotate(rotate_by)
+    rotate_list_internal = list(rotate_list_internal)
+    return rotate_list_internal
 
 
-def python_list_to_Human_list(text):
+def python_list_to_human_list(text):
     # Grabs the text one line_number at a time to format it
     text_intermediate = str(text)
     # Removes extra space in beginning keeping with excessive use the text flying off into space
@@ -36,7 +36,7 @@ def python_list_to_Human_list(text):
     return text_intermediate
 
 
-def Deferred_Split(text, split_by, times_to_defer=2):
+def deferred_split(text, split_by, times_to_defer=2):
     text_split = ['']
     split_instance = 0
     for item in text:
@@ -53,7 +53,7 @@ def Deferred_Split(text, split_by, times_to_defer=2):
     return text_split
 
 
-def Split_First_Instance(text, split_by):
+def split_first_instance(text, split_by):
     text_split = ['']
     split_instance = 0
     for item in text:

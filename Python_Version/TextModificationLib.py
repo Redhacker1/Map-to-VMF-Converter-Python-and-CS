@@ -39,7 +39,7 @@ def recombine(list_text: list) -> str:
     return list_to_str
 
 
-def Unwrap(input_string, left_side, right_side, add_back_newline=False):
+def unwrap(input_string, left_side, right_side, add_back_newline=False):
     input_string = input_string.strip(left_side)
     input_string = input_string.strip(right_side + ' \n')
     if add_back_newline:
@@ -55,7 +55,7 @@ def add_to_both_sides(input_string, left_side, right_side):
 
 
 # Turns a delimited string into a variable used mostly for configuration library stuff
-def String_To_Dictionary(string, line_split=";", value_split="="):
+def string_to_dictionary(string, line_split=";", value_split="="):
     dict_new = {}
     values = split(string, line_split, True)
     for item in values:
@@ -64,7 +64,7 @@ def String_To_Dictionary(string, line_split=";", value_split="="):
     return dict_new
 
 
-def Read_file(file_to_read):
+def read_file(file_to_read):
     try:
         # Opens file
         file = open(file_to_read, mode='r')
@@ -80,7 +80,7 @@ def Read_file(file_to_read):
 
 
 # Checks the file for contents
-def Check_File_Has_Contents(input_file):
+def check_file_has_contents(input_file):
     file = open(input_file, "r")
     # Sets the cursor essentially to 0 on the text file
     file.seek(0)
@@ -97,13 +97,13 @@ def Check_File_Has_Contents(input_file):
 
 
 # Use function to make string lower case and do case-less matching to ensure it matches and makes things case
-# insensitive. Equivalent to .casefold()
+# insensitive. Equivalent to .case_fold()
 def make_lowercase(string):
     string_rebuild = ''
     ascii_interp = list(bytes(string, "ascii"))
     for each in ascii_interp:
         each = int(each)
-        if 90 > each > 65:
+        if 90 >= each >= 65:
             each = each + 32
         string_rebuild = string_rebuild + chr(each)
     return string_rebuild
@@ -111,7 +111,7 @@ def make_lowercase(string):
 
 # I found this online and do not fully understand the specifics, The code reads the raw data which is many times
 # Faster for getting the line numbers in large files
-def Count_Lines_Fast(file_name):
+def count_lines_fast(file_name):
     # Opens the file raw
     f = open(file_name, 'rb')
     # sets lines equal to 0
@@ -133,7 +133,7 @@ def Count_Lines_Fast(file_name):
     return lines
 
 
-def RemoveCPPStyleComments(string_input):
+def remove_cpp_style_comments(string_input):
     lines = split(string_input, '\n', True)
     lines_dict = {}
     number = 0
@@ -143,7 +143,7 @@ def RemoveCPPStyleComments(string_input):
     for x in range(1, 2):
         for line in lines_dict:
             if '//' in lines_dict[line]:
-                lines_dict[line] = remove(lines_dict[line], FindBetweenTwoValues(lines_dict[line], '//', '\n'))
+                lines_dict[line] = remove(lines_dict[line], find_between_two_values(lines_dict[line], '//', '\n'))
                 lines_dict[line] = remove(lines_dict[line], '//')
     lines.clear()
     for each in lines_dict:
@@ -152,9 +152,9 @@ def RemoveCPPStyleComments(string_input):
     return lines
 
 
-def FindBetweenTwoValues(Search, firstIndex, LastIndex, suppress_error=True):
+def find_between_two_values(search, first_index, last_index, suppress_error=True):
     try:
-        return (Search.split(firstIndex))[1].split(LastIndex)[0]
+        return (search.split(first_index))[1].split(last_index)[0]
     except IndexError:
         if not suppress_error:
-            print(Search, firstIndex, LastIndex)
+            print(search, first_index, last_index)

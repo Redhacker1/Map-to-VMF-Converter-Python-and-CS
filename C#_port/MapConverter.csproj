@@ -7,21 +7,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="General Libs.dll" />
-    <None Remove="Py_embedded_v37.dll" />
+    <None Include="General Libs.dll" />
+    <None Include="Py_embedded_v37.dll" />
+    <Folder Include="Scripts\" />
+    <Folder Include="Python37\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="Python37\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+    <ItemGroup>
+    <Content Include="python37.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+      <Content Include="python3.7m">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="General Libs.dll" />
+    <Content Include="Scripts\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Py_embedded_v37.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="Py_embedded_v38.dll" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <Reference Include="General Libs">
@@ -30,7 +43,6 @@
     </Reference>
     <Reference Include="Py_embedded_v37">
       <HintPath>Py_embedded_v37.dll</HintPath>
-      <Private>true</Private>
     </Reference>
   </ItemGroup>
 
