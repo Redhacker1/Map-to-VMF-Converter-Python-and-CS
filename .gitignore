@@ -19,3 +19,6 @@ maps/e2m10.txt
 *.CopyComplete
 PythonNetData/obj/Debug/netstandard2.0/Py_embedded_v37.csproj.FileListAbsolute.txt
 PythonNetData/obj/Debug/netstandard2.0/Py_embedded_v37.csproj.FileListAbsolute.txt
+/C#_port/obj/*
+/C#_port/bin/*
+*.diagsession

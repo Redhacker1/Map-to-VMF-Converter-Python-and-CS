@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
+using System.Runtime.CompilerServices;
 
 namespace MapConverter
 {
@@ -9,10 +11,6 @@ namespace MapConverter
         //currently filled with temporary variables so I do not have to worry about variable placement
         General_libs.Text_Modification_Library Text = new General_libs.Text_Modification_Library();
         General_libs.Array_Dict_and_list_library List = new General_libs.Array_Dict_and_list_library();
-        string current_entity = string.Empty;
-        List<string> entity_list = new List<string>(); 
-        List<int> Buffer = new List<int>();
-        int Entity_Reset = 0;
 
 
 
@@ -21,53 +19,62 @@ namespace MapConverter
         //List library
         readonly General_libs.Array_Dict_and_list_library ListLib = new General_libs.Array_Dict_and_list_library();
 
-        string[] FileLines = null;
-        public void ImportMAPfile(string path)
+        public string[] ImportMAPfile(string path)
         {
-            string current_entity = string.Empty;
-            int lines;
+            List<string> entity_list = new List<string>();
+            int Entity_Reset = 1;
+
             var fs = TextLib.Open(path);
-            lines = TextLib.CountLinesReader(path);
-            FileLines = new string[lines];
+            string[] FileLines = fs.ReadToEnd().Split('\n');
+            int lines = FileLines.Count();
 
-                for (int i = 1; i < lines; i++)
+            for (int i = 1; i < lines; i++)
+            {
+                string file_line = FileLines[i] + '\n';
+                for (int characterpos = 0; characterpos < file_line.Length; characterpos++)
                 {
-                string file_line = fs.ReadLine() +'\n';
-                    for (int item = 0; item < file_line.Length; item++)
+                    List<char> Buffer = new List<char>();
+                    StringBuilder current_entity = new StringBuilder();
+                    char character = file_line[characterpos];
+                    if (Buffer.Count == 2)
                     {
-                        char character = file_line[item];
-                        if (Buffer.Count == 2)
-                        {
-                            Buffer[0] = Buffer[1];
-                            Buffer[1] = character;
-                        }
-                        if (ListLib.Compare_List_int(Buffer, new List<int> { '{', '\n' }))
-                        {
-                            Entity_Reset++;
-                            if (Entity_Reset == 1)
-                            {
-                                current_entity = "";
-                            }
-                        }
-
-                        else if (ListLib.Compare_List_int(Buffer, new List<int> { '}', '\n' }))
-                        {
-                            Entity_Reset--;
-                            if (Entity_Reset == 0)
-                            {
-                                entity_list.Add(current_entity);
-                            }
-                        }
-
-                    current_entity = current_entity + character;
+                        Buffer[0] = Buffer[1];
+                        Buffer[1] = character;
+                    }
+                    else
+                    {
+                        Buffer.Add(character);
                     }
 
-                    Console.WriteLine(i);
+                    if (Buffer.Count == 2)
+                    {
+
+                        if (Buffer[0] == '{' && Buffer[1] == (char)13)
+                        {
+                            if (Entity_Reset == 0)
+                            {
+                                Entity_Reset++;
+                                current_entity = new StringBuilder();
+                                current_entity.Append('{');
+                            }
+                        }
+
+                        else if (Buffer[0] == '}' && Buffer[1] == (char)13)
+                        { 
+                            if (Entity_Reset == 1)
+                            {
+                                Entity_Reset--;
+                                entity_list.Add(current_entity.ToString());
+                            }
+                        }
+                    }
+
+                    current_entity.Append(character);
                 }
 
-            Console.WriteLine(Entity_Reset);
+            }
+            return entity_list.ToArray();
         }
-            
     }
 }
 
