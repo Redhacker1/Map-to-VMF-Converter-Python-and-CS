@@ -65,7 +65,7 @@ namespace MapConverter
                     Console.WriteLine(i);
                 }
 
-            //Console.WriteLine(Entity_Reset);
+            Console.WriteLine(Entity_Reset);
         }
             
     }
