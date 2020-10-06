@@ -20,24 +20,26 @@ namespace MapConverter
         readonly General_libs.Text_Modification_Library TextLib = new General_libs.Text_Modification_Library();
         //List library
         readonly General_libs.Array_Dict_and_list_library ListLib = new General_libs.Array_Dict_and_list_library();
+
+        string[] FileLines = null;
         public void ImportMAPfile(string path)
         {
             string current_entity = string.Empty;
             int lines;
             var fs = TextLib.Open(path);
             lines = TextLib.CountLinesReader(path);
+            FileLines = new string[lines];
 
                 for (int i = 1; i < lines; i++)
                 {
-                string file_line = TextLib.AppendString(fs.ReadLine(), "\n");
+                string file_line = fs.ReadLine() +'\n';
                     for (int item = 0; item < file_line.Length; item++)
                     {
                         char character = file_line[item];
                         if (Buffer.Count == 2)
                         {
-                            Buffer = List.Rotate_List_int(Buffer, -1);
-                            Buffer.RemoveAt(Buffer.Count());
-                            Buffer.Add(character);
+                            Buffer[0] = Buffer[1];
+                            Buffer[1] = character;
                         }
                         if (ListLib.Compare_List_int(Buffer, new List<int> { '{', '\n' }))
                         {
@@ -57,7 +59,7 @@ namespace MapConverter
                             }
                         }
 
-                    current_entity = TextLib.AppendString(current_entity, character.ToString());
+                    current_entity = current_entity + character;
                     }
 
                     Console.WriteLine(i);
