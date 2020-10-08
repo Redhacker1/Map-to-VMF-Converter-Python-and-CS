@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +17,10 @@ namespace MapConverter
         static void Main()
         {
             Map_File_lib Library = new Map_File_lib();
-            Library.ImportMAPfile( ArcaneDimensionsDesktop + "ad_sepulcher.map");
+            string[] Entities = Library.ImportMAPfile( ArcaneDimensionsDesktop + "ad_sepulcher.map");
+            Dictionary<int,string> entity_Dictionary = Library.Create_entity_dictionary(Entities);
+            string[] brushes = Library.prep_brushes(entity_Dictionary[1]);
+            Library.read_side(brushes, false);
         }
     }
 }

@@ -43,7 +43,7 @@ def unwrap(input_string, left_side, right_side, add_back_newline=False):
     input_string = input_string.strip(left_side)
     input_string = input_string.strip(right_side + ' \n')
     if add_back_newline:
-        input_string = input_string + ' \n' + right_side
+        input_string = input_string + ' \n'
     return input_string
 
 

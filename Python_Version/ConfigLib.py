@@ -80,7 +80,6 @@ def prep_brushes(world_spawn_item):
 def get_contents_of_map_file():
     entities = []
     append_string = ''
-    buffer = []
     filename_internal = filename + ".map"
     max_lines = 0
     map_file = ''
@@ -95,24 +94,19 @@ def get_contents_of_map_file():
     for _ in range(0, max_lines):
         line = map_file.readline()
         line_ascii = list(bytes(line, "ascii"))
-        # Rotate list or if not big enough to qualify for a rotation just add another letter
+        previous_char = ""
         for letter in line_ascii:
-            if len(buffer) == 2:
-                buffer = List_Dict_Array_Library.rotate_list(buffer, -1)
-                buffer[1] = letter
-            else:
-                buffer.append(letter)
-
-            if buffer == [123, 10]:
-                i += 1
-                if i == 1:
-                    append_string = ''
-            elif buffer == [125, 10]:
-                i -= 1
-                if i == 0:
-                    entities.append('{' + append_string)
+            if letter == 10:
+                if previous_char == 123:
+                    i += 1
+                    if i == 1:
+                        append_string = ''
+                elif previous_char == 125:
+                    i -= 1
+                    if i == 0:
+                        entities.append('{' + append_string)
             append_string = append_string + chr(letter)
-
+            previous_char = letter
     return entities
 
 
@@ -171,7 +165,7 @@ def write_vmf_file(world_data):
                 first_write = False
             file_1.write(ending)
         side_value = make_side_of_brush(brush_data[side])
-        file_1.write(side_value)
+        fle_1.write(side_value)
     print("finishing up brush data...")
     ending = end_brushes(True)
     file_1.write(ending)
@@ -330,6 +324,7 @@ def read_side(lines, mute=True):
                 pass
         else:
             internal_side_id = 0
+    print(plane_dict[1])
 
     return plane_dict
 

@@ -58,7 +58,7 @@ def split_first_instance(text, split_by):
     split_instance = 0
     for item in text:
         if item == split_by and split_instance == 0:
-            if text_split[split_instance] != '':
+            if text_split[0] != '':
                 text_split.append('')
                 split_instance += 1
         elif split_instance == 0:
