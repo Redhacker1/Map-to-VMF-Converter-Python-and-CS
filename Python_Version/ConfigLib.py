@@ -165,7 +165,7 @@ def write_vmf_file(world_data):
                 first_write = False
             file_1.write(ending)
         side_value = make_side_of_brush(brush_data[side])
-        fle_1.write(side_value)
+        file_1.write(side_value)
     print("finishing up brush data...")
     ending = end_brushes(True)
     file_1.write(ending)
@@ -257,7 +257,6 @@ def create_entity(ent_data, ent_id):
 def make_side_of_brush(properties):
     global texture_dir
     side: str = str(properties['points'])
-    side = TextModificationLib.remove(side, ttr_multiple=["[", "]", ",", "'"])
     side = side.strip()
     side = TextModificationLib.replace(side, ") ", ")")
     side = TextModificationLib.remove(side, "[")

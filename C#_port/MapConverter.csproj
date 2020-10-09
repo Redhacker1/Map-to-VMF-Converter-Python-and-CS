@@ -26,9 +26,6 @@
       <HintPath>General Libs.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="Py_embedded_v37">
-      <HintPath>Py_embedded_v37.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

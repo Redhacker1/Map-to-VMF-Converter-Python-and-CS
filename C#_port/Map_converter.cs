@@ -20,7 +20,11 @@ namespace MapConverter
             string[] Entities = Library.ImportMAPfile( ArcaneDimensionsDesktop + "ad_sepulcher.map");
             Dictionary<int,string> entity_Dictionary = Library.Create_entity_dictionary(Entities);
             string[] brushes = Library.prep_brushes(entity_Dictionary[1]);
-            Library.read_side(brushes, false);
+            Console.WriteLine("this many brushes count:" + brushes.Count());
+            Dictionary<int, Dictionary<string, dynamic>> brush_data = Library.read_side(brushes, false);
+            Library.WriteVMF("TestMap", entity_Dictionary,brush_data);
+
+
         }
     }
 }
