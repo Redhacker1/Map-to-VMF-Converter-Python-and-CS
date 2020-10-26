@@ -215,7 +215,7 @@ def detect_attributes(ent_data):
     for each in attributes_list:
         attributes_list[i] = each + '"'
         attribute_name = TextModificationLib.find_between_two_values(each, '"', '"')
-        attribute = find_attribute(each, TextModificationLib.find_between_two_values(each, '"', '"'))
+        attribute = find_attribute(each, attribute_name)
         attributes_dict[attribute_name] = attribute.strip()
         i += 1
     return attributes_dict
@@ -323,7 +323,6 @@ def read_side(lines, mute=True):
                 pass
         else:
             internal_side_id = 0
-    print(plane_dict[1])
 
     return plane_dict
 
@@ -353,6 +352,5 @@ def browse_map_file():
 
 filename = browse_map_file()
 filename = TextModificationLib.remove(TextModificationLib.make_lowercase(filename), ".map")
-print(filename)
 world = parse_file()
 write_vmf_file(world)
