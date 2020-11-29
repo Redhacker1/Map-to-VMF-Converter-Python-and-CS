@@ -1,4 +1,5 @@
 ﻿using General_libs;
+using System;
 
 namespace MapConverter
 {
@@ -9,11 +10,40 @@ namespace MapConverter
         //static string laptopTestPath = @"C:\Users\donov\Documents\GitHub\Quake_source_Tools\maps\map_files\quake_1";
         static string DesktopTestPath = @"C:\Users\Donovan\Documents\GitHub\Quake_source_Tools\maps\map_files\quake_1\";
         static string ArcaneDimensionsDesktop = @"C:\Users\Donovan\Documents\GitHub\Quake_source_Tools\maps\arcane_dimentions_data\maps\";
-        static void Main()
+        static void Main(string[] FileOpener)
         {
-            Map_File_lib Library = new Map_File_lib();
-            string[] Entities = Library.ImportMAPfile( ArcaneDimensionsDesktop + "ad_sepulcher.map");
-            Map World = Library.Create_entity_dictionary(Entities);
+            foreach(string Argument in FileOpener)
+            {
+                Console.WriteLine(Argument);
+            }
+            //string[] Entities = Map_File_lib.ImportMAPfile( DesktopTestPath + "START.MAP");
+            var World = Map_File_lib.ImportMapFile(ArcaneDimensionsDesktop + "ad_sepulcher.map");
+            var Mapfile = XMLMapWriter.MakeMapFile("", "TestMap.xml", false);
+
+            
+        using (Mapfile)
+            {
+                Console.WriteLine("Hello?");
+                XMLMapWriter.StartEntities(Mapfile);
+                foreach (Point_Entity entity in World.PEntities)
+                {
+                    XMLMapWriter.PointEntityToXML(Mapfile, entity);
+                }
+                foreach (BrushEntity entity in World.BEntities)
+                {
+                    XMLMapWriter.BrushEntityToXML(Mapfile,entity, true);
+                }
+                XMLMapWriter.EndEntities(Mapfile);
+                XMLMapWriter.EndFile(Mapfile);
+                Console.WriteLine("Hello?");
+                Mapfile.Close();
+
+
+            }
+        
+
+
+
 
         }
     }

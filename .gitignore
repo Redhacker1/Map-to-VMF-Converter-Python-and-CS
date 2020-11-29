@@ -22,3 +22,5 @@ PythonNetData/obj/Debug/netstandard2.0/Py_embedded_v37.csproj.FileListAbsolute.t
 /C#_port/obj/*
 /C#_port/bin/*
 *.diagsession
+*.diagsession
+C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2

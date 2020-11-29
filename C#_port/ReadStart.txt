@@ -1,1 +1,0 @@
-{"classname"	"light_flame_large_yellow""origin"	"126 526 12"}

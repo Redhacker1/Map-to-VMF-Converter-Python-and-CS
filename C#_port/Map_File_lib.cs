@@ -8,377 +8,131 @@ using System.Numerics;
 
 namespace MapConverter
 {
-    class Map_File_lib
-    { 
-
-
-        public string[] ImportMAPfile(string path)
+    static class Map_File_lib
+    {
+        static Side ConvertSide(Node SideNode)
         {
-            List<string> entity_list = new List<string>();
-            int Entity_Reset = 0;
-            var fs = Text_Modification_Library.Open(path);
-            string[] FileLines = fs.ReadToEnd().Split('\n');
+            string Texture = SideNode.GetNodebyName("Texture").Keyvalue;
+            string X_Offset = SideNode.GetNodebyName("X_offset").Keyvalue;
+            string Y_Offset = SideNode.GetNodebyName("Y_offset").Keyvalue;
+            string X_Scale = SideNode.GetNodebyName("X_scale").Keyvalue;
+            string Y_Scale = SideNode.GetNodebyName("Y_scale").Keyvalue;
+            string Rot_Angle = SideNode.GetNodebyName("Rot_angle").Keyvalue;
+            string ID = SideNode.GetNodebyName("ID").Keyvalue;
 
-            for (int increment = 0; increment < FileLines.Length; increment++)
+            Node[] pointnodes = SideNode.GetNodesWithStringInName("PointLocation", false);
+            Vector3[] FaceCoords = new Vector3[3];
+            int Index = 0;
+            foreach (Node pointnode in pointnodes)
             {
-                FileLines[increment] += '\n';
+                FaceCoords[Index] = MathLib.ThreeNumberstringsToVector3(pointnode.Keyvalue, ' ');
+                Index++;
             }
 
-            StringBuilder current_entity = new StringBuilder();
-            char previous_char = '\0';
-
-            foreach (string line in FileLines)
-            {
-                foreach (char character in line)
-                {
-                    current_entity.Append(character);
-                    if (character == (char)13)
-                    {
-                        if (previous_char == '}')
-                        {
-                            --Entity_Reset;
-                            if (Entity_Reset == 0)
-                            {
-                                entity_list.Add('{' + current_entity.ToString());
-                            }
-                        }
-                        else if (previous_char == '{')
-                        {
-                            ++Entity_Reset;
-                            if (Entity_Reset == 1)
-                            {
-                                current_entity.Clear();
-                            }
-                        }
-                    }
-                    previous_char = character;
-                }
-
-            }
-
-            return entity_list.ToArray();
+            return new Side(Texture, FaceCoords, Convert.ToSingle(X_Offset), Convert.ToSingle(Y_Offset), Convert.ToSingle(Rot_Angle), Convert.ToSingle(Y_Scale), Convert.ToSingle(X_Scale), Convert.ToInt32(ID));
         }
 
-        public Map Create_entity_dictionary(string[] entities_list)
+        static Brush ConvertBrush(Node BrushNode)
         {
-            Map Current_map = new Map();
-            List<Point_Entity> point_Entities = new List<Point_Entity>();
-            List<BrushEntity> brush_Entities = new List<BrushEntity>();
-            int i;
-            try
+            var CurrentBrush = new Brush
             {
-                for (int Entity_index= 0; Entity_index < entities_list.Length; Entity_index++)
-                {
-                    i = Entity_index + 1;
-                    // Remove char 13 in ascii table because it fucks with \n as \n is ascii character 10
-                    string entity = entities_list[Entity_index].Replace(((char)13).ToString(), "").Trim();
-
-                    //get all attributes
-                    Dictionary<string, string> entity_attributes = detect_attributes(entity);
-                    // These lines get the classname and remove it from the previous dictionary it was attached to.
-                    string classname = entity_attributes["classname"]; 
-                    entity_attributes.Remove("classname");
-
-                    // Only happens when dealing with brush entities!
-                    if (entity.Contains("}\n}"))
-                    {
-                        // Grabs ALL brushes in entity as a single string Note: This is the ENTIRE ENTITY in string f
-                        string[] ent_data = entity.Split("{\n");
-                        // Offset to account for data pulled earlier 
-                        int brushcount = ent_data.Length;
-                        // The list of brushes in USABLE FORM to be appended to the brush entity
-                        var allbrushes = new List<Brush>();
-
-                        for (int brushnumber = 0; brushnumber < brushcount - 2; brushnumber++)
-                        {
-                            string[] sides = ent_data[brushnumber].Split('\n');
-                            List<Side> Sides = new List<Side>(); 
-                            for (int sideindex = 0; sideindex < sides.Length - 1; ++sideindex)
-                            {
-                                string[] side_string_coords = sides[sideindex].Split(")");
-
-                                List<Vector3> TotalPoints = new List<Vector3>();
-                                foreach (string side_attributes in side_string_coords)
-                                {
-                                    if (side_attributes != string.Empty && !side_attributes.Contains("//"))
-                                    {
-                                        string[] pointLocation = Text_Modification_Library.Remove(Text_Modification_Library.Remove(side_attributes, "("), "}").Trim().Split(' ');
-
-                                        if (pointLocation.Length == 3)
-                                        {
-                                            TotalPoints.Add(new Vector3(Convert.ToInt32(pointLocation[0]), Convert.ToInt32(pointLocation[1]), Convert.ToInt32(pointLocation[2])));
-
-                                        }
-
-                                    }
-                                }
-                                if (side_string_coords.Length == 4)
-                                {
-                                    string[] Other_Values = side_string_coords[3].Split(' ');
-                                    Sides.Add(new Side(Other_Values[1], TotalPoints.ToArray(), Convert.ToSingle(Other_Values[2]), Convert.ToSingle(Other_Values[3]), Convert.ToSingle(Other_Values[4]), Convert.ToSingle(Other_Values[6]), Convert.ToSingle(Other_Values[5].Trim()), new Vector3(0, 0, 0), new Vector3(0, 0, 0), sideindex));
-                                }
-                                else if (side_string_coords.Length != 1)
-                                {
-                                    Console.WriteLine("Malformed Brush... Skipping");
-                                    Console.ReadKey();
-                                    break;
-                                }
-                            }
-                            allbrushes.Add(new Brush(Sides.ToArray()));
-                        }
-                        brush_Entities.Add(new BrushEntity(entity_attributes,classname, allbrushes.ToArray()));
-
-                        //var current_entity  = new BrushEntity(entity_attributes,classname);
-                        if ("a" == "worldspawn")
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        if( entity_attributes.ContainsKey("origin"))
-                        {
-                            string[] preveclocation = entity_attributes["origin"].Split(' ');
-                            entity_attributes.Remove("origin");
-                            Vector3 Veclocation = new Vector3(Convert.ToInt32(preveclocation[0]), Convert.ToInt32(preveclocation[1]), Convert.ToInt32(preveclocation[2]));
-                            point_Entities.Append(new Point_Entity(Veclocation, entity_attributes, classname));
-                            
-                        }
-                    }
-                }
-                return new Map(point_Entities.ToArray(), brush_Entities.ToArray());
-            }
-            catch (Exception Error)
+                ID = Convert.ToInt32(BrushNode.Keyvalue)
+            };
+            List<Side> Sides = new List<Side>();
+            foreach (Node SideNode in BrushNode.GetNodesWithStringInName("Side", false))
             {
-                Console.WriteLine(Error.Message);
-                //Console.WriteLine(Error.InnerException.Message);
-                Environment.Exit(2);
-            }
 
-            return Current_map;
+                Sides.Add(ConvertSide(SideNode));
+
+            }
+            CurrentBrush.Sides = Sides.ToArray();
+            return CurrentBrush;
         }
 
-        Dictionary<string, string> detect_attributes(string ent_data)
+        static BrushEntity ConvertBrushEntity(Node Entity, Dictionary<string, string> Attributes_dictionary)
         {
-            Dictionary<string, string> attributes_dict = new Dictionary<string, string>();
-            string[] attributes_list = ent_data.Split("\"\n");
-
-            for (int i = 0; i < attributes_list.Count(); ++i)
+            Node[] Brushes = Entity.GetNodesByName("Brush");
+            List<Brush> Brush_list = new List<Brush>();
+            foreach (Node BrushNode in Brushes)
             {
-                attributes_list[i] = attributes_list[i] + '"';
-                string attribute_name = Text_Modification_Library.Find_between_two_values(attributes_list[i], "\"", "\"").Trim();
-                if (attribute_name != string.Empty)
-                {
-                    string attribute = find_attribute(attributes_list[i], attribute_name, "\n").Trim();
-
-                    if(attribute != string.Empty)
-                    {
-                        attributes_dict[attribute_name] = attribute;
-                    }
-                }  
-                
+                Brush_list.Add(ConvertBrush(BrushNode));
             }
-
-            return attributes_dict;
+            string Classname = Attributes_dictionary["classname"];
+            Attributes_dictionary.Remove("classname");
+            return new BrushEntity(Attributes_dictionary, Classname, Brush_list.ToArray());
         }
 
-        string find_attribute(string ent_data, string target_attribute, string end_location)
+        public static Map ConvertMap(Node ParseTree)
         {
-            string attribute = Text_Modification_Library.Find_between_two_values(ent_data, target_attribute, end_location);
-            if (attribute != string.Empty)
-            {
-                attribute = Text_Modification_Library.Remove(attribute, '"'.ToString());
-                string wierdstring = "  ";
-                attribute = Text_Modification_Library.Remove(attribute, wierdstring).Trim();
-            }
-            else
-            {
-                attribute = "";
-            }
-            return attribute;
-        }
+            var WorldStruct = new Map();
+            var PEntities = new List<Point_Entity>();
+            var BEntities = new List<BrushEntity>();
 
-        string Remove_cpp_style_comments(string input)
-        {
-            string[] lines = input.Split('\n');
-            Dictionary<int, string> lines_dict = new Dictionary<int, string>();
-            int number = 0;
-            StringBuilder Stringrebuilder = new StringBuilder();
 
-            foreach (string line in lines)
+            foreach (Node Entity in ParseTree.Children)
             {
-                if (line.Contains(@"//"))
+                bool isBrushEntity = CheckIsBrushEntity(Entity);
+
+                // Get Attributes!
+                var Attributes_dictionary = GetAttributes(Entity);
+                if (isBrushEntity)
                 {
-                    string line_modified = Text_Modification_Library.Remove(line, Text_Modification_Library.Find_between_two_values(line, "//", "\n"));
-                    line_modified = Text_Modification_Library.Remove(line_modified, @"//");
-                    lines_dict[number] = line_modified;
+                    BEntities.Add(ConvertBrushEntity(Entity, Attributes_dictionary));
                 }
                 else
                 {
-                    lines_dict[number] = line;
-                }
-                number += 1;
-            }
-            foreach (var keyValuePair in lines_dict)
-            {
-                Stringrebuilder.Append(keyValuePair.Value + '\n');
-            }
-            return Stringrebuilder.ToString();
-        }
-
-        string Unwrap(string input_string, char left_side, char right_side, bool add_back_newline= false)
-        {
-            input_string = input_string.Trim();
-            input_string = input_string.TrimStart(left_side);
-            input_string = input_string.TrimEnd(right_side);
-
-            if (add_back_newline)
-            {
-                input_string += '\n';
-            }
-            return input_string;
-        }
-
-        public Dictionary<int, Dictionary<string, dynamic>> Read_side(string[] lines, bool mute= true)
-        {
-            if (!mute)
-                Console.WriteLine("Extracting Data");
-            Dictionary<int, Dictionary<string, dynamic>> plane_dict = new Dictionary<int, Dictionary<string, dynamic>>();
-            int internal_side_id = 0;
-
-            foreach (string line in lines)
-            {
-                if (line.Contains('(') && line.Contains(')'))
-                {
-                    internal_side_id += 1;
-
-                    string value = Text_Modification_Library.Remove(line, "[");
-                    value = Text_Modification_Library.Remove(value, "]");
-                    value = Text_Modification_Library.Remove(value, "( ");
-                    value = Text_Modification_Library.Replace(value, "  ", " ");
-                    string[] value_final = value.Split(" ) ");
-
-                    List<string> other_values = value_final[3].Split(" ").ToList();
-
-                    foreach(string item in other_values)
-                    { 
-                        if (item == " ")
-                        {
-                            other_values.Remove(" ");
-                        }
-                    }
-
-                    if (true != other_values.Count < 6)
-                    {
-                        Console.WriteLine("Valid Brush");
-                        Dictionary<string, dynamic> CurrentSideDict = new Dictionary<string, dynamic>
-                        {
-                            { "points", new string[3] { '(' + value_final[0] + ')', '(' + value_final[1] + ')', '(' + value_final[2] + ')' } },
-                            { "Material", other_values[0] },
-                            { "x_off", other_values[1] },
-                            { "y_off", other_values[2] },
-                            { "rot_angle", other_values[3] },
-                            { "x_scale", other_values[4] },
-                            { "y_scale", other_values[5] }
-                        };
-                        plane_dict.Add(internal_side_id, CurrentSideDict);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error");
-                        Console.WriteLine(other_values.Count);
-                    }
+                    string Origin = Attributes_dictionary["origin"];
+                    string Classname = Attributes_dictionary["classname"];
+                    Attributes_dictionary.Remove("classname");
+                    Attributes_dictionary.Remove("origin");
+                    PEntities.Add(new Point_Entity(MathLib.ThreeNumberstringsToVector3(Origin, " "), Attributes_dictionary, Classname));
 
                 }
-                else
-                {
-                    internal_side_id = 0;
-                }
             }
-            Console.WriteLine(plane_dict.Keys.Count);
-            return plane_dict;
-
+            WorldStruct.PEntities = PEntities.ToArray();
+            WorldStruct.BEntities = BEntities.ToArray();
+            return WorldStruct;
         }
 
-        public void WriteVMF(string filename, Dictionary<int, string> Entites, Dictionary<int, Dictionary<string, dynamic>> WorldSpawn_brushes)
+        static Dictionary<string, string> GetAttributes(Node Entity)
         {
-            bool first_write = true;
-            Console.WriteLine("Writing Data, opening destination file...");
-            StreamWriter file_1 = Text_Modification_Library.Open(filename + ".vmf", "w");
-            file_1.Write("versioninfo\n{\n}\n\n'viewsettings\n{\n}\n\nworld\n{\n\"id\" \"1\"\n\t\"mapversion\" \"1\"\n\t\"classname\" \"worldspawn\"\n");
-            Console.WriteLine("retrieving brush data...");
-            string ending;
-            foreach (KeyValuePair<int, Dictionary<string, dynamic>> item in WorldSpawn_brushes)
+            Node[] Attributes = Entity.GetNodesWithStringInName("Attribute:", true);
+            Dictionary<string, string> Attributes_dictionary = new Dictionary<string, string>();
+            foreach (Node Attribute in Attributes)
             {
-                if( item.Key == 1)
-                {
-                    ending = End_brushes(first_write: first_write);
-                    if (first_write)
-                    {
-                        first_write = false;
-                    }
-                    file_1.Write(ending);
-                }
-                string side_value = Make_Side_Of_Brush(item.Value);
-                Console.WriteLine(side_value);
-                file_1.Write(side_value);
+                Attributes_dictionary.Add(Attribute.Name, Attribute.Keyvalue);
             }
-            Console.WriteLine("finishing up brush data...");
-            ending = End_brushes(true);
-            Console.WriteLine("finishing up brush data");
-            file_1.Write(ending);
-            Console.WriteLine("Creating entity list...");
-            
+            return Attributes_dictionary;
         }
 
-        private string Make_Side_Of_Brush(Dictionary<string, dynamic> properties)
+        static bool CheckIsBrushEntity(Node Entity)
         {
-            string texture_dir = "quake/";
-            Dictionary<string, string> Texture_replacement_dictionary = new Dictionary<string, string> { { "TRIGGER", "tools/toolstrigger" }, { "CLIP", "tools/toolsclip" } };
-            string side = properties["points"];
-            side = Text_Modification_Library.Remove(side,"[");
-            side = Text_Modification_Library.Remove(side, "]");
-            side = Text_Modification_Library.Remove(side, ",");
-            side = Text_Modification_Library.Remove(side, "'");
-            side.Trim();
-            side = Text_Modification_Library.Replace(side, ") ", ")");
-            string texture;
-            if (!Texture_replacement_dictionary.ContainsValue(properties["Material"]))
+            Node Brushes = Entity.GetNodebyName("Brush");
+            if (Brushes != null)
             {
-                texture = texture_dir + Text_Modification_Library.Remove(properties["Material"], "#");
-                texture = Text_Modification_Library.Remove(texture, "*");
-                texture = texture.ToLower();
+                return true;
             }
             else
             {
-                texture = Texture_replacement_dictionary[properties["Material"]];
+                return false;
             }
-            string y_scale = properties["y_scale"];
-            string x_scale = properties["x_scale"];
-            string offset_x = properties["x_off"];
-            string offset_y = properties["y_off"];
-            string plane = "side\n{{\n\t\"id\" \"" + properties["ID"] + "\"\n\t\"plane\" \"" + side + "\"\n\t\"material\" \"" + texture + "\"\n\t\"uaxis\" \"[0 0 0 " + offset_x + "] " + x_scale + "\"\n\t\"vaxis\" \"[0 0 0 " + offset_y + "] " + y_scale + "\"\n\t\"rotation\" \"" + properties["rot_angle"] + "\"\n\t\"lightmapscale\" \"16\"\n\t\"smoothing_groups\" \"0\"\n}}";
-            return plane;
         }
 
-    string End_brushes(bool end_file= false, bool first_write= false)
+        public static Map ImportMapFile(string Path)
         {
-            if (end_file)
+            Console.WriteLine("Loading File");
+            StreamReader fs = new StreamReader(Path);
+            string File_string = fs.ReadToEnd();
+            Console.WriteLine("Creating Parse tree");
+            var WorldandEntities = Preprocessing.Break_Entities(File_string);
+            for (int i = 0; i < WorldandEntities.Children.Count; i++)
             {
-                return "}}";
+                var Entity = WorldandEntities.Children[i];
+                NewParser.ParseEntity(ref Entity);
             }
-            else if (!first_write)
-            {
-                return "\n\t\t}\n\tsolid\n\t{";
-            }
-            else
-            {
-                return "\n\tsolid\n\t{";
-            }
+            var Worldstruct = ConvertMap(WorldandEntities);
+
+            return Worldstruct;
         }
     }
 }
