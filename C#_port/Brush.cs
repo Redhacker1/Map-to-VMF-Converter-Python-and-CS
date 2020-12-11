@@ -29,7 +29,7 @@ namespace MapConverter
             Id = id;
             U_axis = new Vector3(0, 0, 0);
             V_axis = new Vector3(0, 0, 0);
-            Normal = MathLib.CalculateNormal(points[0], points[1], points[2]);
+            Normal = MathLib.CalulateNormal_UnitVector(points[0], points[1], points[2]);
         }
 
         public string Texture { get; set; }
