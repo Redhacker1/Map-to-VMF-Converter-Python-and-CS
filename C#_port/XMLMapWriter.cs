@@ -14,7 +14,6 @@ namespace MapConverter
             XmlWriterSettings settings = new XmlWriterSettings
             {
                 Indent = true,
-                Encoding = Encoding.ASCII,
                 IndentChars = "\t"
             };
             if (Filename.Contains(".vmf"))
@@ -27,7 +26,9 @@ namespace MapConverter
                 Filename.Replace(".map", ".xml");
                 Filename.Replace(".MAP", ".xml");
             }
+            _ = System.IO.Directory.CreateDirectory(string.Format("/Converted/"));
             XmlWriter xmlWriter = XmlWriter.Create(Path + Filename, settings);
+
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("map");
             return xmlWriter;

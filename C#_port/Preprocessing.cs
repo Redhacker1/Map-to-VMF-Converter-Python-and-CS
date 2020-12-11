@@ -35,6 +35,10 @@ namespace MapConverter
 
         public static Node Break_Entities(string MapFile)
         {
+            MapFile = MapFile.Remove(MapFile.IndexOf("versioninfo"), MapFile.IndexOf("}")+1);
+            MapFile = MapFile.Remove(MapFile.IndexOf("visgroups"), MapFile.IndexOf("}") + 1);
+            MapFile = MapFile.Remove(MapFile.IndexOf("viewsettings"), MapFile.IndexOf("}") + 1);
+            Console.WriteLine(MapFile);
             Node World = new Node("World");
             int Entity_Reset = 0;
             int Entity_Count = 0;
@@ -62,6 +66,10 @@ namespace MapConverter
                                 if (current_entity[current_entity.Length - 1] == '}')
                                 {
                                     current_entity.Remove(current_entity.Length - 1, 1);
+                                }
+                                if(current_entity.ToString().Contains("editor\n"))
+                                {
+                                    current_entity.Remove(current_entity.ToString().IndexOf("editor\n"), current_entity.Length -1 - current_entity.ToString().IndexOf("editor\n"));
                                 }
                                 Node EntityNode = new Node("Entity")
                                 {

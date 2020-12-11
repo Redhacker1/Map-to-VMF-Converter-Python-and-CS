@@ -8,8 +8,67 @@ using System.Text;
 
 namespace MapConverter
 {
-    static class NewParser
+    static class VMFParser
     {
+
+        static public Node Break_Entities(string MapFile)
+        {
+            Node World = new Node("World");
+            int Entity_Reset = 0;
+            int Entity_Count = 0;
+
+            string[] FileLines = MapFile.Split('\n');
+
+            for (int increment = 0; increment < FileLines.Length; increment++)
+            {
+                FileLines[increment] += '\n';
+            }
+            StringBuilder current_entity = new StringBuilder();
+            char previous_char = '\0';
+
+            foreach (string line in FileLines)
+            {
+                foreach (char character in line)
+                {
+                    if (character == (char)13)
+                    {
+                        if (previous_char == '}')
+                        {
+                            --Entity_Reset;
+                            if (Entity_Reset == 0)
+                            {
+                                if (current_entity[current_entity.Length - 1] == '}')
+                                {
+                                    current_entity.Remove(current_entity.Length - 1, 1);
+                                }
+                                Node EntityNode = new Node(string.Format("Entity", Entity_Count))
+                                {
+                                    Keyvalue = current_entity.ToString()
+                                };
+                                World.Children.Add(EntityNode);
+                                Entity_Count++;
+                            }
+                        }
+                        else if (previous_char == '{')
+                        {
+                            ++Entity_Reset;
+                            if (Entity_Reset == 1)
+                            {
+                                current_entity.Clear();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        current_entity.Append(character);
+                        previous_char = character;
+                    }
+                }
+
+            }
+
+            return World;
+        }
 
         static void PullKeyValuePairs(ref Node Entity)
         {
@@ -216,7 +275,7 @@ namespace MapConverter
 
         static void ParseBrushes(ref Node Entity)
         {
-            string[] Brushes = BreakBrushes(Entity);
+            string[] Brushes = Preprocessing.BreakBrushes(Entity);
             int BrushID = 0;
             foreach (string brush in Brushes)
             {
@@ -224,46 +283,6 @@ namespace MapConverter
                 BrushID++;
                 Entity.Children.Add(brushNode);
             }
-        }
-
-        public static void ParseEntity(ref Node Entity)
-        {
-            // Actually all we need to parse a Point entity!
-            PullKeyValuePairs(ref Entity);
-            //Checks to see if we have a brush entity... because they require a LOT more work and a LOT more memory
-            if (Entity.Keyvalue.Contains('{') & Entity.Keyvalue.Contains('}'))
-            {
-                ParseBrushes(ref Entity);
-            }
-        }
-    
-
-        static string[] BreakBrushes(Node Entity)
-        {
-            StringBuilder current_Brush = new StringBuilder();
-            int BrushCount = 0;
-            List<string> Brushes = new List<string>();
-            char Previous_Value = '\n';
-            foreach (char Character in Entity.Keyvalue)
-            {
-                if (Previous_Value == '{' && Character == '\n')
-                {
-                    current_Brush.Clear();
-                    BrushCount++;
-                }
-                else if (Character == '}' && Previous_Value == '\n')
-                {
-                    Brushes.Add(current_Brush.ToString());
-                }
-                else
-                {
-                    current_Brush.Append(Character);
-                }
-                Previous_Value = Character;
-            }
-            Entity.Keyvalue = string.Empty;
-            Console.WriteLine(Entity.Keyvalue);
-            return Brushes.ToArray();
         }
     }
 }

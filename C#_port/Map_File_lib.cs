@@ -100,7 +100,14 @@ namespace MapConverter
             Dictionary<string, string> Attributes_dictionary = new Dictionary<string, string>();
             foreach (Node Attribute in Attributes)
             {
-                Attributes_dictionary.Add(Attribute.Name, Attribute.Keyvalue);
+                try
+                {
+                    Attributes_dictionary.Add(Attribute.Name, Attribute.Keyvalue);
+                }
+                catch(Exception Except)
+                {
+                    Console.WriteLine("Attibute addition failed! reason: {0}", Except.Message);
+                }
             }
             return Attributes_dictionary;
         }
@@ -125,6 +132,7 @@ namespace MapConverter
             string File_string = fs.ReadToEnd();
             Console.WriteLine("Creating Parse tree");
             var WorldandEntities = Preprocessing.Break_Entities(File_string);
+
             for (int i = 0; i < WorldandEntities.Children.Count; i++)
             {
                 var Entity = WorldandEntities.Children[i];
