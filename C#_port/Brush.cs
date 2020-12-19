@@ -27,9 +27,22 @@ namespace MapConverter
             Y_scale = y_scale;
             X_scale = x_scale;
             Id = id;
+            
             U_axis = new Vector3(0, 0, 0);
             V_axis = new Vector3(0, 0, 0);
             Normal = MathLib.CalulateNormal_UnitVector(points[0], points[1], points[2]);
+            Normal_Unnormalized = MathLib.CalculateNormal(points[0], points[1], points[2]);
+            Equation = new Plane_equation();
+            
+            // Distance from origin
+            Equation.d = (-1 * (Normal.X * points[0].X)) - (Normal.Y * points[0].Y) - (Normal.Z * points[0].Z);
+
+            Equation.a = Normal_Unnormalized.X;
+            Equation.b = Normal_Unnormalized.Y;
+            Equation.c = Normal_Unnormalized.Z;
+
+
+            Console.WriteLine(Equation.d/(Math.Sqrt(Math.Pow(Normal.X, 2) + Math.Pow(Normal.Y, 2) + Math.Pow(Normal.Z, 2))));
         }
 
         public string Texture { get; set; }
@@ -42,7 +55,21 @@ namespace MapConverter
         public Vector3 U_axis { get; set; }
         public Vector3 V_axis { get; set; }
         public Vector3 Normal { get; set; }
+        public Vector3 Normal_Unnormalized { get; set; }
         public int Id { get; set; }
+
+        public Plane_equation Equation { get; set; }
+
+        public class Plane_equation
+        {
+            // ax + by + cz + d = 0
+
+            public float a;
+            public float b;
+            public float c;
+            public float d;
+        };
+
 
     }
     class Point_Entity

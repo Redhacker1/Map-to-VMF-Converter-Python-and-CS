@@ -26,7 +26,10 @@ namespace MapConverter
                 Filename.Replace(".map", ".xml");
                 Filename.Replace(".MAP", ".xml");
             }
-            _ = System.IO.Directory.CreateDirectory(string.Format("/Converted/"));
+            if (Path != string.Empty)
+            {
+                _ = System.IO.Directory.CreateDirectory(string.Format("/Converted/"));
+            }
             XmlWriter xmlWriter = XmlWriter.Create(Path + Filename, settings);
 
             xmlWriter.WriteStartDocument();
@@ -58,9 +61,9 @@ namespace MapConverter
             {
                 MapFile.WriteStartElement("position");
             }
-            MapFile.WriteAttributeString("x", Vector3.X.ToString());
-            MapFile.WriteAttributeString("y", Vector3.Y.ToString());
-            MapFile.WriteAttributeString("z", Vector3.Z.ToString());
+            MapFile.WriteString(Vector3.X.ToString() + " ");
+            MapFile.WriteString(Vector3.Y.ToString() + " ");
+            MapFile.WriteString(Vector3.Z.ToString());
             if (Element_Name != "")
             {
                 MapFile.WriteEndElement();
@@ -85,6 +88,11 @@ namespace MapConverter
         {
             if (entity.Classname.ToLower() != "worldspawn" || DontIgnoreWorldSpawn)
             {
+                if(entity.Classname.ToLower() == "worldspawn")
+                {
+                    entity.Classname = "func_brush";
+                    entity.Attributes = new Dictionary<string, string>();
+                }
                 MapFile.WriteStartElement(entity.Classname);
                 foreach (string Key in entity.Attributes.Keys)
                 {
@@ -113,9 +121,9 @@ namespace MapConverter
                         {
                             MapFile.WriteStartElement("HalfSpace_Coord");
                             MapFile.WriteAttributeString("id", i.ToString());
-                            MapFile.WriteAttributeString("x", Face.Points[i].X.ToString());
-                            MapFile.WriteAttributeString("y", Face.Points[i].Y.ToString());
-                            MapFile.WriteAttributeString("z", Face.Points[i].Z.ToString());
+                            MapFile.WriteString(Face.Points[i].X.ToString() + " ");
+                            MapFile.WriteString(Face.Points[i].Y.ToString() + " ");
+                            MapFile.WriteString(Face.Points[i].Z.ToString());
                             MapFile.WriteEndElement();
                         }
                         MapFile.WriteStartElement("texture_pos");
@@ -125,6 +133,7 @@ namespace MapConverter
                         MapFile.WriteAttributeString("y", Face.Y_scale.ToString());
                         MapFile.WriteEndElement();
                         WriteVector(MapFile, Face.Normal, "normal");
+                        WriteVector(MapFile, Face.Normal_Unnormalized, "normal_not_normalized");
                         MapFile.WriteEndElement();
                         ++DoneSides;
                     }

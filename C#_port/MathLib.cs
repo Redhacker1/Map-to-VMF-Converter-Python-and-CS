@@ -46,5 +46,18 @@ namespace MapConverter
             return new Vector3(Convert.ToInt32(XYZArray[0].Trim()), Convert.ToInt32(XYZArray[1].Trim()), Convert.ToInt32(XYZArray[2].Trim()));
         }
 
+        static public Matrix4x4 RotateMatrix(Vector3 origin, Vector3 Rotation, Matrix4x4 Matrix = new Matrix4x4())
+        {
+            var Rotation_1 = Matrix4x4.CreateRotationX(Rotation.X, origin);
+            var Rotation_2 = Matrix4x4.CreateRotationY(Rotation.Y, origin);
+            var Rotation_3 = Matrix4x4.CreateRotationZ(Rotation.Z, origin);
+
+            var Rotation_Final = Rotation_1 * Rotation_2 * Rotation_3;
+
+            Matrix = Matrix * Rotation_Final;
+
+            return Matrix;
+        }
+
     }
 }

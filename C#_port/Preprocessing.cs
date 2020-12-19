@@ -33,12 +33,15 @@ namespace MapConverter
             return Brushes.ToArray();
         }
 
-        public static Node Break_Entities(string MapFile)
+        public static Node Break_Entities(string MapFile, bool VMF = false)
         {
-            MapFile = MapFile.Remove(MapFile.IndexOf("versioninfo"), MapFile.IndexOf("}")+1);
-            MapFile = MapFile.Remove(MapFile.IndexOf("visgroups"), MapFile.IndexOf("}") + 1);
-            MapFile = MapFile.Remove(MapFile.IndexOf("viewsettings"), MapFile.IndexOf("}") + 1);
-            Console.WriteLine(MapFile);
+            if(VMF)
+            {
+                MapFile = MapFile.Remove(MapFile.IndexOf("versioninfo"), MapFile.IndexOf("}") + 1);
+                MapFile = MapFile.Remove(MapFile.IndexOf("visgroups"), MapFile.IndexOf("}") + 1);
+                MapFile = MapFile.Remove(MapFile.IndexOf("viewsettings"), MapFile.IndexOf("}") + 1);
+                Console.WriteLine(MapFile);
+            }
             Node World = new Node("World");
             int Entity_Reset = 0;
             int Entity_Count = 0;

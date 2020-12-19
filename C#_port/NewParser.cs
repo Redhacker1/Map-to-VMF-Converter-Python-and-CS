@@ -84,8 +84,17 @@ namespace MapConverter
                 }
 
                 //Texture
+
+                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                bool Valve = false;
                 float value = float.NaN;
                 bool Success = float.TryParse(Side_components[15], out _);
+
+                if (side.Contains("[") && side.Contains("]"))
+                {
+                    Valve = true;
+
+                }
 
                 string Texture = string.Empty;
                 bool OffsetByOne = false;
@@ -119,11 +128,25 @@ namespace MapConverter
                 string X_off;
                 if (OffsetByOne)
                 {
-                    X_off = Side_components[15];
+                    if(!Valve)
+                    {
+                        X_off = Side_components[15];
+                    }
+                    else
+                    {
+                        X_off = "0";                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                    }
                 }
                 else
                 {
-                    X_off = Side_components[16];
+                    if(!Valve)
+                    {
+                        X_off = Side_components[16];
+                    }
+                    else                 //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                    {
+                        X_off = "0";
+                    }
                 }
                 Node XOffsetNode = new Node("X_offset")
                 {
@@ -135,11 +158,25 @@ namespace MapConverter
                 string Y_off;
                 if (OffsetByOne)
                 {
-                    Y_off = Side_components[16];
+                    if(!Valve)
+                    {
+                        Y_off = Side_components[16];
+                    }
+                    else                 //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                    {
+                        Y_off = "0";
+                    }
                 }
                 else
                 {
-                    Y_off = Side_components[17];
+                    if(!Valve)
+                    {
+                        Y_off = Side_components[17];
+                    }
+                    else
+                    {
+                        Y_off = "0";                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                    }
                 }
                 Node YOffsetNode = new Node("Y_offset")
                 {

@@ -81,7 +81,15 @@ namespace MapConverter
                 }
                 else
                 {
-                    string Origin = Attributes_dictionary["origin"];
+                    string Origin;
+                    if (Attributes_dictionary.ContainsKey("origin"))
+                    {
+                        Origin = Attributes_dictionary["origin"];
+                    }
+                    else
+                    {
+                        Origin = "0 0 0";
+                    }
                     string Classname = Attributes_dictionary["classname"];
                     Attributes_dictionary.Remove("classname");
                     Attributes_dictionary.Remove("origin");

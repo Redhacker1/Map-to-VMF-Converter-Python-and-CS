@@ -24,3 +24,10 @@ PythonNetData/obj/Debug/netstandard2.0/Py_embedded_v37.csproj.FileListAbsolute.t
 *.diagsession
 *.diagsession
 C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2
+*.ipch
+*.db
+*.db
+*.opendb
+*.db-wal
+*.db-shm
+*.db
