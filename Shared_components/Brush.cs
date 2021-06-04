@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace MapConverter
+namespace MapConverter_Shared
 {
-    struct Brush
+    public struct Brush
     {
         public Side[] Sides { get; set; }
         public int ID { get; set; }
@@ -15,9 +15,9 @@ namespace MapConverter
             ID = id;
         }
     }
-    struct Side
+    public struct Side
     {
-        public Side(string texture, Vector3[] points, float x_offset, float y_offset, float rot_angle, float y_scale, float x_scale, int id)
+        public Side(string texture, Vector3[] points, float x_offset, float y_offset, float rot_angle, float y_scale, float x_scale, int id, Vector3 u_axis, Vector3 v_axis)
         {
             Texture = texture;
             Points = points;
@@ -28,21 +28,20 @@ namespace MapConverter
             X_scale = x_scale;
             Id = id;
             
-            U_axis = new Vector3(0, 0, 0);
-            V_axis = new Vector3(0, 0, 0);
+            U_axis = u_axis;
+            V_axis = v_axis;
             Normal = MathLib.CalulateNormal_UnitVector(points[0], points[1], points[2]);
             Normal_Unnormalized = MathLib.CalculateNormal(points[0], points[1], points[2]);
-            Equation = new Plane_equation();
-            
-            // Distance from origin
-            Equation.d = (-1 * (Normal.X * points[0].X)) - (Normal.Y * points[0].Y) - (Normal.Z * points[0].Z);
+            Equation = new Plane_equation
+            {
 
-            Equation.a = Normal_Unnormalized.X;
-            Equation.b = Normal_Unnormalized.Y;
-            Equation.c = Normal_Unnormalized.Z;
+                // Distance from origin
+                d = (-1 * (Normal.X * points[0].X)) - (Normal.Y * points[0].Y) - (Normal.Z * points[0].Z),
 
-
-            Console.WriteLine(Equation.d/(Math.Sqrt(Math.Pow(Normal.X, 2) + Math.Pow(Normal.Y, 2) + Math.Pow(Normal.Z, 2))));
+                a = Normal_Unnormalized.X,
+                b = Normal_Unnormalized.Y,
+                c = Normal_Unnormalized.Z
+            };
         }
 
         public string Texture { get; set; }
@@ -58,6 +57,7 @@ namespace MapConverter
         public Vector3 Normal_Unnormalized { get; set; }
         public int Id { get; set; }
 
+
         public Plane_equation Equation { get; set; }
 
         public class Plane_equation
@@ -72,7 +72,7 @@ namespace MapConverter
 
 
     }
-    class Point_Entity
+    public class Point_Entity
     {
         public Point_Entity(Vector3 location, Dictionary<string, string> attributes, string classname, bool isbrushentity = false)
         {
@@ -88,7 +88,7 @@ namespace MapConverter
         public string Classname { get; set; }
     }
 
-    class BrushEntity : Point_Entity
+    public class BrushEntity : Point_Entity
     {
         public BrushEntity(Dictionary<string, string> attributes, string classname, Brush[] brushes) : base(new Vector3(0.0f, 0.0f, 0.0f ), attributes, classname, true)
         {
@@ -97,7 +97,7 @@ namespace MapConverter
         public Brush[] Brushes { get; set; }
     }
 
-    struct Map
+    public struct Map
     {
         public Map(Point_Entity[] pentities, BrushEntity[] bentities)
         {

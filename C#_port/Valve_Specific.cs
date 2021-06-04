@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using MapConverter_Shared;
 
 namespace MapConverter
 {
     class Valve_Specific
     {
-        public static Vector4[] ConvertToValveTexFormat(Side Side)
+        public static void ConvertToValveTexFormat(ref Side Side)
         {
             Vector3[] p = Side.Points;
             var subtract1 = p[1] - p[0];
@@ -32,7 +33,7 @@ namespace MapConverter
             Matrix4x4 rotation = Matrix4x4.CreateRotationY((float)angle_x) * Matrix4x4.CreateRotationX((float)angle_y);
             Vector3 UTransformedVec3 = Vector3.Transform(new Vector3(U.X, U.Y, U.Z), rotation);
             Vector3 VTransformedVec3 = Vector3.Transform(new Vector3(V.X, V.Y, V.Z), rotation);
-            
+
             // Move the Vector3 values back into Vector4
             U.X = UTransformedVec3.X;
             U.Y = UTransformedVec3.Y;
@@ -65,8 +66,8 @@ namespace MapConverter
             V.Y = VTransformedVec3.Y;
             V.Z = VTransformedVec3.Z;
 
-            return new Vector4[] {U,V};
-
+            Side.U_axis = Vector3.Normalize(UTransformedVec3);
+            Side.V_axis = Vector3.Normalize(VTransformedVec3);
         }
     }
 }

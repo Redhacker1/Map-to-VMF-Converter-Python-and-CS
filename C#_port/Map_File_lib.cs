@@ -5,20 +5,22 @@ using System.Text;
 using System.IO;
 using General_libs;
 using System.Numerics;
+using MapConverter_Shared;
+using Side = MapConverter_Shared.Side;
 
 namespace MapConverter
 {
     static class Map_File_lib
     {
-        static Side ConvertSide(Node SideNode)
+        static Side? ConvertSide(Node SideNode)
         {
-            string Texture = SideNode.GetNodebyName("Texture").Keyvalue;
-            string X_Offset = SideNode.GetNodebyName("X_offset").Keyvalue;
-            string Y_Offset = SideNode.GetNodebyName("Y_offset").Keyvalue;
-            string X_Scale = SideNode.GetNodebyName("X_scale").Keyvalue;
-            string Y_Scale = SideNode.GetNodebyName("Y_scale").Keyvalue;
-            string Rot_Angle = SideNode.GetNodebyName("Rot_angle").Keyvalue;
-            string ID = SideNode.GetNodebyName("ID").Keyvalue;
+            string Texture = SideNode.GetNodebyName("Texture", out bool _).Keyvalue;
+            string X_Offset = SideNode.GetNodebyName("X_offset", out bool _).Keyvalue;
+            string Y_Offset = SideNode.GetNodebyName("Y_offset", out bool _).Keyvalue;
+            string X_Scale = SideNode.GetNodebyName("X_scale", out bool _).Keyvalue;
+            string Y_Scale = SideNode.GetNodebyName("Y_scale", out bool _).Keyvalue;
+            string Rot_Angle = SideNode.GetNodebyName("Rot_angle", out bool _).Keyvalue;
+            string ID = SideNode.GetNodebyName("ID", out bool _).Keyvalue;
 
             Node[] pointnodes = SideNode.GetNodesWithStringInName("PointLocation", false);
             Vector3[] FaceCoords = new Vector3[3];
@@ -29,7 +31,30 @@ namespace MapConverter
                 Index++;
             }
 
-            return new Side(Texture, FaceCoords, Convert.ToSingle(X_Offset), Convert.ToSingle(Y_Offset), Convert.ToSingle(Rot_Angle), Convert.ToSingle(Y_Scale), Convert.ToSingle(X_Scale), Convert.ToInt32(ID));
+            // Gets the Sidenode named TypeTag, gets the keyvalue and then sees if that is equal to Standard
+            if(SideNode.GetNodebyName("TypeTag", out bool _).Keyvalue == "Standard")
+            {
+                var Texture_Coords = new Side(Texture, FaceCoords, Convert.ToSingle(X_Offset), Convert.ToSingle(Y_Offset), Convert.ToSingle(Rot_Angle), Convert.ToSingle(Y_Scale), Convert.ToSingle(X_Scale), Convert.ToInt32(ID), Vector3.Zero, Vector3.Zero);
+                Valve_Specific.ConvertToValveTexFormat(ref Texture_Coords);
+                return Texture_Coords;
+            }
+            else if (SideNode.GetNodebyName("TypeTag", out bool _).Keyvalue == "Valve220")
+            {
+                //Console.WriteLine(SideNode.GetNodebyName("X_offset").Keyvalue);
+                string[] VectorAndXoffset = SideNode.GetNodebyName("X_offset", out bool _).Keyvalue.Trim().Split(' ');
+                Vector3 XVectorWithoutOffset = MathLib.ThreeNumberstringsToVector3(VectorAndXoffset[0], VectorAndXoffset[1], VectorAndXoffset[2]);
+
+                //Console.WriteLine(SideNode.GetNodebyName("Y_offset").Keyvalue);
+                string[] VectorAndYoffset = SideNode.GetNodebyName("Y_offset", out bool _).Keyvalue.Trim().Split(' ');
+                Vector3 YVectorWithoutOffset = MathLib.ThreeNumberstringsToVector3(VectorAndXoffset[0], VectorAndXoffset[1], VectorAndXoffset[2]);
+
+                return new Side(Texture, FaceCoords, Convert.ToSingle(VectorAndXoffset[3]), Convert.ToSingle(VectorAndYoffset[3]), Convert.ToSingle(Rot_Angle), Convert.ToSingle(Y_Scale), Convert.ToSingle(X_Scale), Convert.ToInt32(ID),XVectorWithoutOffset, YVectorWithoutOffset);
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         static Brush ConvertBrush(Node BrushNode)
@@ -41,8 +66,11 @@ namespace MapConverter
             List<Side> Sides = new List<Side>();
             foreach (Node SideNode in BrushNode.GetNodesWithStringInName("Side", false))
             {
-
-                Sides.Add(ConvertSide(SideNode));
+                Side? Tempside = ConvertSide(SideNode);
+                if(Tempside != null)
+                {
+                    Sides.Add((Side)Tempside);
+                }
 
             }
             CurrentBrush.Sides = Sides.ToArray();
@@ -122,8 +150,8 @@ namespace MapConverter
 
         static bool CheckIsBrushEntity(Node Entity)
         {
-            Node Brushes = Entity.GetNodebyName("Brush");
-            if (Brushes != null)
+            Node Brushes = Entity.GetNodebyName("Brush", out bool bWasSuccess);
+            if (bWasSuccess)
             {
                 return true;
             }
@@ -146,6 +174,8 @@ namespace MapConverter
                 var Entity = WorldandEntities.Children[i];
                 NewParser.ParseEntity(ref Entity);
             }
+
+            Console.WriteLine("{0}, nodes in world!",WorldandEntities.Childcount(true));
             var Worldstruct = ConvertMap(WorldandEntities);
 
             return Worldstruct;

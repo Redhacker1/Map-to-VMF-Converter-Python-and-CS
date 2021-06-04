@@ -31,3 +31,17 @@ C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2
 *.db-wal
 *.db-shm
 *.db
+/C#_port/.vs/*
+C#_port/bin/*
+C#_port/obj/*
+\Map-to-VMF-Converter-Python-and-CS\C#_port\.vs\MapConverter\DesignTimeBuild\.dtbcache.v2
+VMF_Parser/bin/*
+VMF_Parser/obj/*
+v16/*
+C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2
+C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2
+C#_port/.vs/MapConverter/v16/Browse.VC.db
+C#_port/.vs/MapConverter/DesignTimeBuild/.dtbcache.v2
+
+Shared_components\bin\*
+Shared_components\obj\*

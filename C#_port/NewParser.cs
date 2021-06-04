@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using MapConverter_Shared;
 
 namespace MapConverter
 {
@@ -16,7 +17,7 @@ namespace MapConverter
             StringBuilder String = new StringBuilder();
             bool Instring = false;
             bool Key = true;
-            Node KeyValuePair = new Node("Blank");
+            Node KeyValuePair = new Node("Blank", null);
             for (int i = 0; i < Entity.Keyvalue.Length; i++)
             {
 
@@ -27,7 +28,7 @@ namespace MapConverter
                     {
                         if (Key)
                         {
-                            KeyValuePair = new Node("Attribute:" + String.ToString().Trim());
+                            KeyValuePair = new Node("Attribute:" + String.ToString().Trim(), Entity);
                             Key = false;
                         }
                         else
@@ -57,10 +58,11 @@ namespace MapConverter
             int SideID = 0;
             foreach (string side in Sides)
             {
-                Node Sidenode = new Node("Side");
+                string Backup_Side = side;
+                Node Sidenode = new Node("Side", Brush);
                 string[] Side_components = side.Trim().Split(" ");
                 var a = new StringBuilder();
-                string[] TupleList = new string[3];
+                //string[] TupleList = new string[3];
                 int Index = 0;
 
                 foreach (char Character in side)
@@ -72,7 +74,7 @@ namespace MapConverter
 
                     else if (Character == ')')
                     {
-                        Node Coords = new Node(string.Format("PointLocation_{0}", Index));
+                        Node Coords = new Node(string.Format("PointLocation_{0}", Index), Sidenode);
                         Coords.Keyvalue = a.ToString();
                         Sidenode.Children.Add(Coords);
                         Index++;
@@ -87,13 +89,27 @@ namespace MapConverter
 
                 //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
                 bool Valve = false;
-                float value = float.NaN;
                 bool Success = float.TryParse(Side_components[15], out _);
 
+                string[] Side_1 = new string[0];
                 if (side.Contains("[") && side.Contains("]"))
                 {
+                    Side_1 = Backup_Side.Split(']', '[');
                     Valve = true;
+                    Node TypeTagNode = new Node("TypeTag", Sidenode)
+                    {
+                        Keyvalue = "Valve220"
+                    };
+                    Sidenode.Children.Add(TypeTagNode);
 
+                }
+                else
+                {
+                    Node TypeTagNode = new Node("TypeTag", Sidenode)
+                    {
+                        Keyvalue = "Standard"
+                    };
+                    Sidenode.Children.Add(TypeTagNode);
                 }
 
                 string Texture = string.Empty;
@@ -118,7 +134,7 @@ namespace MapConverter
                 {
                     Texture = Side_components[15];
                 }
-                Node TextureNode = new Node("Texture")
+                Node TextureNode = new Node("Texture", Sidenode)
                 {
                     Keyvalue = Texture
                 };
@@ -134,7 +150,7 @@ namespace MapConverter
                     }
                     else
                     {
-                        X_off = "0";                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                        X_off = Side_1[1];                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
                     }
                 }
                 else
@@ -145,10 +161,10 @@ namespace MapConverter
                     }
                     else                 //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
                     {
-                        X_off = "0";
+                        X_off = Side_1[1];
                     }
                 }
-                Node XOffsetNode = new Node("X_offset")
+                Node XOffsetNode = new Node("X_offset", Sidenode)
                 {
                     Keyvalue = X_off
                 };
@@ -162,9 +178,9 @@ namespace MapConverter
                     {
                         Y_off = Side_components[16];
                     }
-                    else                 //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                    else                 
                     {
-                        Y_off = "0";
+                        Y_off = Side_1[3];
                     }
                 }
                 else
@@ -175,10 +191,10 @@ namespace MapConverter
                     }
                     else
                     {
-                        Y_off = "0";                //HACK: Set Texture coordinates to 0 when dealing with Vave 220 format
+                        Y_off = Side_1[3];                
                     }
                 }
-                Node YOffsetNode = new Node("Y_offset")
+                Node YOffsetNode = new Node("Y_offset", Sidenode)
                 {
                     Keyvalue = Y_off
                 };
@@ -194,7 +210,7 @@ namespace MapConverter
                 {
                     Rotation = Side_components[18];
                 }
-                Node RotationNode = new Node("Rot_angle")
+                Node RotationNode = new Node("Rot_angle", Sidenode)
                 {
                     Keyvalue = Rotation
                 };
@@ -210,7 +226,7 @@ namespace MapConverter
                 {
                     X_Scale = Side_components[19];
                 }
-                Node XScaleNode = new Node("X_scale")
+                Node XScaleNode = new Node("X_scale", Sidenode)
                 {
                     Keyvalue = X_Scale
                 };
@@ -226,16 +242,15 @@ namespace MapConverter
                 {
                     Y_Scale = Side_components[20];
                 }
-                Node YScaleNode = new Node("Y_scale")
+                Node YScaleNode = new Node("Y_scale", Sidenode)
                 {
                     Keyvalue = Y_Scale
                 };
                 Sidenode.Children.Add(YScaleNode);
-                Node IDNode = new Node("ID")
+                Node IDNode = new Node("ID", Sidenode)
                 {
                     Keyvalue = SideID.ToString()
                 };
-                Sidenode.Children.Add(YScaleNode);
                 Sidenode.Children.Add(IDNode);
                 SideID++;
 
@@ -243,10 +258,12 @@ namespace MapConverter
                 Brush.Children.Add(Sidenode);
             }
         }
-        static Node ParseBrush(string brush, int ID)
+        static Node ParseBrush(string brush, int ID, Node Parent)
         {
-            Node brushNode = new Node("Brush");
-            brushNode.Keyvalue = ID.ToString();
+            Node brushNode = new Node("Brush", Parent)
+            {
+                Keyvalue = ID.ToString()
+            };
             ParseFace(ref brushNode, brush);
             return brushNode;
         }
@@ -255,9 +272,9 @@ namespace MapConverter
         {
             string[] Brushes = BreakBrushes(Entity);
             int BrushID = 0;
-            foreach (string brush in Brushes)
+            for (int i = 0; i < Brushes.Length; i++)
             {
-                Node brushNode = ParseBrush(brush, BrushID);
+                Node brushNode = ParseBrush(Brushes[i], BrushID, Entity);
                 BrushID++;
                 Entity.Children.Add(brushNode);
             }
@@ -299,7 +316,6 @@ namespace MapConverter
                 Previous_Value = Character;
             }
             Entity.Keyvalue = string.Empty;
-            Console.WriteLine(Entity.Keyvalue);
             return Brushes.ToArray();
         }
     }

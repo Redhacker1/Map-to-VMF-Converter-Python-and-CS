@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using MapConverter_Shared;
 
 namespace MapConverter
 {

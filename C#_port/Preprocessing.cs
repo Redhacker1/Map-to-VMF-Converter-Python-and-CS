@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapConverter_Shared;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -40,7 +41,6 @@ namespace MapConverter
                 MapFile = MapFile.Remove(MapFile.IndexOf("versioninfo"), MapFile.IndexOf("}") + 1);
                 MapFile = MapFile.Remove(MapFile.IndexOf("visgroups"), MapFile.IndexOf("}") + 1);
                 MapFile = MapFile.Remove(MapFile.IndexOf("viewsettings"), MapFile.IndexOf("}") + 1);
-                Console.WriteLine(MapFile);
             }
             Node World = new Node("World");
             int Entity_Reset = 0;

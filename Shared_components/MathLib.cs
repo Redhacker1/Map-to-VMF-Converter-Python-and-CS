@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 
-namespace MapConverter
+namespace MapConverter_Shared
 {
-    static class MathLib
+    public static class MathLib
     {
         static public Vector3 CalculateNormal(Vector3 vector1, Vector3 vector2, Vector3 vector3)
         {
@@ -33,7 +33,7 @@ namespace MapConverter
         }
         static public Vector3 ThreeNumberstringsToVector3(string x, string y, string z)
         {
-            return new Vector3(Convert.ToInt32(x.Trim()), Convert.ToInt32(y.Trim()), Convert.ToInt32(z.Trim()));
+            return new Vector3(Convert.ToSingle(x.Trim()), Convert.ToSingle(y.Trim()), Convert.ToSingle(z.Trim()));
         }
         static public Vector3 ThreeNumberstringsToVector3(string SpacedXYZ, string Splitter)
         {

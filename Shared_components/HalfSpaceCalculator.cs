@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
-using MapConverter_Shared;
 
-namespace MapConverter
+namespace MapConverter_Shared
 {
     class HalfSpaceCalculator
     {
